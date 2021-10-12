@@ -14,6 +14,8 @@ public class Date {
         }
     }
 
+    //Getters
+
     public int getYear() {
         return year;
     }
@@ -21,6 +23,8 @@ public class Date {
     public boolean getUpdate() {
         return update;
     }
+
+    //Setters
 
     //MODIFIES: this
     //EFFECTS: if update is true, set year to y
@@ -35,6 +39,8 @@ public class Date {
     public void setUpdateTrue() {
         this.update = true;
     }
+
+    //Methods
 
     //REQUIRES: y to be larger than 0
     //EFFECTS: return true if y equals year

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Customer {
     private String name;
     private ArrayList<Item> purchases;
+    private boolean vip;
 
     //REQUIRES: name and purchases not to be null
     //MODIFIES: this
@@ -12,8 +13,10 @@ public class Customer {
     public Customer(String name, ArrayList<Item> purchases) {
         this.name = name;
         this.purchases = purchases;
+        this.vip = false;
     }
 
+    //Getters
     public String getName() {
         return name;
     }
@@ -21,6 +24,32 @@ public class Customer {
     public ArrayList<Item> getPurchases() {
         return purchases;
     }
+
+    public boolean isVip() {
+        return vip;
+    }
+
+    //Setters
+
+    //MODIFIES: this
+    //EFFECTS: set this.name to name
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: set this.purchases to purchases
+    public void setPurchases(ArrayList<Item> purchases) {
+        this.purchases = purchases;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: set this.vip to vip
+    public void setVip(boolean vip) {
+        this.vip = vip;
+    }
+
+    //Methods
 
     //EFFECTS: returns the size of the amount of purchases
     public int purchaseCount() {
@@ -34,18 +63,6 @@ public class Customer {
             purchaseTotalValue += item.getPrice();
         }
         return purchaseTotalValue;
-    }
-
-    //MODIFIES: this
-    //EFFECTS: set this.name to name
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    //MODIFIES: this
-    //EFFECTS: set this.purchases to purchases
-    public void setPurchases(ArrayList<Item> purchases) {
-        this.purchases = purchases;
     }
 
     //REQUIRES: Item i and Sales s not to be null

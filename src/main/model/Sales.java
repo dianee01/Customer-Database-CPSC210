@@ -71,6 +71,6 @@ public class Sales {
     //EFFECTS: entirely return an item
     public void returnItem(CustomerDatabase cd, Customer c, Item i, Sales s) {
         c.deletePurchase(i, s);
-        cd.removeCustomer(c);
+        cd.removeRegularCustomer(c);
     }
 }
