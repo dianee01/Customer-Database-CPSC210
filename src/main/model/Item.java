@@ -13,6 +13,7 @@ public class Item {
         this.purchaseDate = d;
     }
 
+    //Getters
     public String getItemName() {
         return itemName;
     }
@@ -24,6 +25,8 @@ public class Item {
     public Date getPurchaseDate() {
         return purchaseDate;
     }
+
+    //Setters
 
     //MODIFIES: this
     //EFFECTS: set itemName to i

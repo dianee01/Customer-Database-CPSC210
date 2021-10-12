@@ -27,25 +27,18 @@ public class Date {
     //Setters
 
     //MODIFIES: this
-    //EFFECTS: if update is true, set year to y
+    //EFFECTS: if update is true, set year to y and update to false
     public void setYear(int y) {
         if (update) {
             this.year = y;
         }
+        this.update = false;
     }
 
     //MODIFIES: this
     //EFFECTS: set update to true
     public void setUpdateTrue() {
         this.update = true;
-    }
-
-    //Methods
-
-    //REQUIRES: y to be larger than 0
-    //EFFECTS: return true if y equals year
-    public boolean equals(int y) {
-        return y > 0 && y == year;
     }
 
 }

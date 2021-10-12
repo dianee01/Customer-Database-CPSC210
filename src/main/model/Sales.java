@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Sales {
     private ArrayList<Item> soldItems;
-    private int totalSales;
+    private double totalSales;
 
     //MODIFIES: this
     //EFFECTS: set soldItems to items and set totalSales to the total of price of the items
@@ -15,7 +15,7 @@ public class Sales {
         }
     }
 
-    public int getTotalSales() {
+    public double getTotalSales() {
         return totalSales;
     }
 
@@ -32,7 +32,7 @@ public class Sales {
     public int itemCountPerYear(Date d) {
         int itemPerYear = 0;
         for (Item i : soldItems) {
-            if (i.getPurchaseDate() == d) {
+            if (i.getPurchaseDate().getYear() == d.getYear()) {
                 itemPerYear += 1;
             }
         }
@@ -40,10 +40,10 @@ public class Sales {
     }
 
     //EFFECTS: return the total dollar amount of sales sold during a specific date d (year)
-    public int totalSalesPerYear(Date d) {
-        int salesPerYear = 0;
+    public double totalSalesPerYear(Date d) {
+        double salesPerYear = 0;
         for (Item i : soldItems) {
-            if (i.getPurchaseDate() == d) {
+            if (i.getPurchaseDate().getYear() == d.getYear()) {
                 salesPerYear += i.getPrice();
             }
         }
