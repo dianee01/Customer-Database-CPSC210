@@ -15,19 +15,20 @@ This project can be used by many stores to track their customers and sales. It c
 
 ## User stories
 
-**Phase 1**
+**Already Developed For Phase 1**
 - As a user, I want to be able to create a new customer and add it to a list of existing customers
 - As a user, I want to be able to select a customer and add a new item they purchased with associated dollar amount
-- As a user, I want to be able to delete a returned item from the customer's items
+- As a user, I want to be able to delete a returned item from the customer's items and total sales
 - As a user, I want to be able to delete a customer from the list if they returned the only item they bought
+- As a user, I want to be able to see the number of total customers, regular customers, and VIP customers
+- As a user, I want to be able to see the amount of sold items in total
+- As a user, I want to be able to see the amount of sold items per year
+- As a user, I want to be able to see my total sales (in dollars)
+- As a user, I want to be able to see my annual sales (in dollars)
 
 **Planned**
+- As a user, I want to be able to differentiate between regular and VIP customers
 - As a user, I want to be able to delete a customer from the regular customer list and add them into the VIP customer list if they purchased more than $1000 dollars within the current or the past calendar year
 - As a user, I want to be able to delete a customer from the VIP customer list and add them into the regular customer list if they purchased less than $1000 dollars within the past calendar year
 - As a user, I want to be able to sort my VIP customers with decreasing purchasing power/loyalty with the store
 - As a user, I want to be able to update my VIP customers list once every year
-- As a user, I want to be able to see the number of customers, regular customers, and VIP customers
-- As a user, I want to be able to see the amount of item items in total
-- As a user, I want to be able to see the amount of item items per year
-- As a user, I want to be able to see my total sales (in dollars)
-- As a user, I want to be able to see my annual sales (in dollars)
