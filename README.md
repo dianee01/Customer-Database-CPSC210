@@ -18,7 +18,7 @@ This project can be used by many stores to track their customers and sales. It c
 **Phase 1**
 - As a user, I want to be able to create a new customer and add it to a list of existing customers
 - As a user, I want to be able to select a customer and add a new item they purchased with associated dollar amount
-- As a user, I want to be able to delete a returned item from the customer's purchases
+- As a user, I want to be able to delete a returned item from the customer's items
 - As a user, I want to be able to delete a customer from the list if they returned the only item they bought
 
 **Planned**
@@ -27,7 +27,7 @@ This project can be used by many stores to track their customers and sales. It c
 - As a user, I want to be able to sort my VIP customers with decreasing purchasing power/loyalty with the store
 - As a user, I want to be able to update my VIP customers list once every year
 - As a user, I want to be able to see the number of customers, regular customers, and VIP customers
-- As a user, I want to be able to see the amount of item purchases in total
-- As a user, I want to be able to see the amount of item purchases per year
+- As a user, I want to be able to see the amount of item items in total
+- As a user, I want to be able to see the amount of item items per year
 - As a user, I want to be able to see my total sales (in dollars)
 - As a user, I want to be able to see my annual sales (in dollars)
