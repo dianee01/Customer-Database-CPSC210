@@ -72,8 +72,8 @@ public class Customer {
     //EFFECTS: remove a purchased item to the specific customer's purchase history, and remove it from total sales
     public void deletePurchase(Item i, Sales s) {
         if (s.itemCount() > 0) {
-            purchases.remove(i);
             s.deleteItemFromSold(i);
+            purchases.remove(i);
         }
     }
 }

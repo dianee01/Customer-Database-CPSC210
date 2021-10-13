@@ -72,7 +72,7 @@ public class CustomerDatabase {
     //EFFECTS: if customer is a regular customer and no longer purchased anything from the store
     //         then delete them from the customer tracker
     public void removeRegularCustomer(Customer c) {
-        if (regularCustomers.contains(c) && c.purchaseCount() == 0) {
+        if (c.purchaseCount() == 0) {
             regularCustomers.remove(c);
             customers.remove(c);
         }
@@ -82,9 +82,8 @@ public class CustomerDatabase {
     //MODIFIES: this
     //EFFECTS: check for vip and regular customers' purchased amount in the last year, update accordingly
     public void annualUpdate(Date d) {
-        d.setUpdateTrue();
-        int totalPurchasesLastYear = 0;
         for (Customer c : customers) {
+            double totalPurchasesLastYear = 0;
             for (Item i : c.getPurchases()) {
                 if (i.getPurchaseDate().getYear() == (d.getYear() - 1)) {
                     totalPurchasesLastYear += i.getPrice();
@@ -94,34 +93,16 @@ public class CustomerDatabase {
             if (totalPurchasesLastYear >= 1000) {
                 if (!c.isVip()) {
                     c.setVip(true);
-                    updateVipCustomers(c);
+                    vipCustomers.add(c);
+                    regularCustomers.remove(c);
                 }
             } else {
                 if (c.isVip()) {
                     c.setVip(false);
-                    updateRegularCustomers(c);
+                    vipCustomers.remove(c);
+                    regularCustomers.add(c);
                 }
             }
-        }
-    }
-
-    //REQUIRES: Customer c not to be null
-    //MODIFIES: this
-    //EFFECTS: if customer is a vip, update the vip and regular customers lists
-    public void updateVipCustomers(Customer c) {
-        if (c.isVip()) {
-            vipCustomers.add(c);
-            regularCustomers.remove(c);
-        }
-    }
-
-    //REQUIRES: Customer c not to be null
-    //MODIFIES: this
-    //EFFECTS: if customer is a vip, update the vip and regular customers lists
-    public void updateRegularCustomers(Customer c) {
-        if (!c.isVip()) {
-            vipCustomers.remove(c);
-            regularCustomers.add(c);
         }
     }
 

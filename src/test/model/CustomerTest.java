@@ -66,16 +66,49 @@ class CustomerTest {
     @Test
     void testPurchaseAmount() {
         c.purchaseAmount();
+        //test new purchases with no item
+        ArrayList<Item> n = new ArrayList<>();
+        Customer NoItems = new Customer("NoName", n);
+        NoItems.purchaseAmount();
+
         assertEquals(500 + 450.5 + 1000, c.purchaseAmount());
+        assertEquals(0, NoItems.purchaseAmount());
     }
 
     @Test
     void testAddPurchase() {
-
+        Sales s = new Sales(home);
+        Item newItem = new Item("New", 0.1, d2020);
+        c.addPurchase(newItem, s);
+        assertEquals(home, c.getPurchases());
+        assertEquals(home, s.getSoldItems());
+        assertEquals(500.0 + 450.5 + 1000.0 + 0.1, s.getTotalSales());
     }
 
     @Test
     void testDeletePurchase() {
+        Sales s = new Sales(home);
+        c.deletePurchase(bed, s);
+        //new list with only one item left
+        ArrayList<Item> o = new ArrayList<>();
+        o.add(desk);
+        Customer onlyOne = new Customer("onlyOne", o);
+        Sales onlyOneItem = new Sales(o);
+        onlyOne.deletePurchase(desk, onlyOneItem);
+        //new list with no items at all
+        ArrayList<Item> n = new ArrayList<>();
+        Customer none = new Customer("none", n);
+        Sales noItems = new Sales(n);
+        none.deletePurchase(desk, noItems);
 
+        assertEquals(home, c.getPurchases());
+        assertEquals(home, s.getSoldItems());
+        assertEquals(500.0 + 450.5, s.getTotalSales());
+        assertEquals(o, onlyOne.getPurchases());
+        assertEquals(o, onlyOneItem.getSoldItems());
+        assertEquals(0, onlyOneItem.getTotalSales());
+        assertEquals(n, none.getPurchases());
+        assertEquals(n, noItems.getSoldItems());
+        assertEquals(0, noItems.getTotalSales());
     }
 }
