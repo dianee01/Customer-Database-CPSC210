@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -99,6 +100,13 @@ public class SalesTest {
 
     @Test
     void testReturnItem() {
-        //needs to be tested after finishing customer and customerdatabase tests
+        Customer oneItem = new Customer("oneItem", new ArrayList<Item>(Arrays.asList(chair)));
+        Customer multipleItems = new Customer("multipleItems", new ArrayList<Item>(Arrays.asList(desk, bed)));
+        CustomerDatabase cData = new CustomerDatabase(new ArrayList<Customer>(Arrays.asList(oneItem, multipleItems)));
+        s.returnItem(cData, multipleItems, desk, s);
+        s.returnItem(cData, oneItem, chair, s);
+
+        assertEquals(new ArrayList<Item>(Arrays.asList(bed)), s.getSoldItems());
+        assertEquals(new ArrayList<Customer>(Arrays.asList(multipleItems)), cData.getCustomers());
     }
 }

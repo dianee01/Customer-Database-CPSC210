@@ -8,11 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ItemTest {
     private Date d;
     private Item chair;
+    private Item negativePrice;
 
     @BeforeEach
     void setup() {
         d = new Date(2019);
         chair = new Item("chair", 500.0, d);
+        negativePrice = new Item("negativePrice", -100.0, d);
     }
 
     @Test

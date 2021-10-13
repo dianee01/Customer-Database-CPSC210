@@ -9,7 +9,9 @@ public class Item {
     //EFFECTS: set itemName to item, price to p, and purchaseDate to d
     public Item(String item, double p, Date d) {
         this.itemName = item;
-        this.price = p;
+        if (p > 0) {
+            this.price = p;
+        }
         this.purchaseDate = d;
     }
 

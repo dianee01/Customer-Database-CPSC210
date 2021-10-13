@@ -8,12 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DateTest {
     private Date date;
     private Date dateSetTrueUpdate;
+    private Date negativeDate;
 
     @BeforeEach
     void setup() {
         date = new Date(2020);
         dateSetTrueUpdate = new Date(2020);
         dateSetTrueUpdate.setUpdateTrue();
+        negativeDate = new Date(-100);
     }
 
     @Test
