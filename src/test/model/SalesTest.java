@@ -66,4 +66,40 @@ public class SalesTest {
         assertEquals(0, s.totalSalesPerYear(d1));
         assertEquals(0, s.totalSalesPerYear(d3000));
     }
+
+    @Test
+    void testAddItemSold() {
+        Item sofa = new Item("sofa", 700.4, d2020);
+        s.addItemSold(sofa);
+        ArrayList<Item> testHome = new ArrayList<>(home);
+        assertEquals(testHome, s.getSoldItems());
+        assertEquals(500.0 + 450.5 + 1000.0 + 700.4, s.getTotalSales());
+    }
+
+    @Test
+    void testDeleteItemFromSold() {
+        s.deleteItemFromSold(bed);
+        ArrayList<Item> testHome = new ArrayList<>(home);
+        //new list with only one item left
+        ArrayList<Item> o = new ArrayList<>();
+        o.add(desk);
+        Sales onlyOneItem = new Sales(o);
+        onlyOneItem.deleteItemFromSold(desk);
+        //new list with no item, so nothing happens if you want to delete a non-existent item
+        ArrayList<Item> n = new ArrayList<>();
+        Sales noItems = new Sales(n);
+        noItems.deleteItemFromSold(desk);
+
+        assertEquals(testHome, s.getSoldItems());
+        assertEquals(500.0 + 450.5, s.getTotalSales());
+        assertEquals(o, onlyOneItem.getSoldItems());
+        assertEquals(0, onlyOneItem.getTotalSales());
+        assertEquals(n, noItems.getSoldItems());
+        assertEquals(0, noItems.getTotalSales());
+    }
+
+    @Test
+    void testReturnItem() {
+        //needs to be tested after finishing customer and customerdatabase tests
+    }
 }

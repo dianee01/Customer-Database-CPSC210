@@ -38,12 +38,6 @@ public class Customer {
     }
 
     //MODIFIES: this
-    //EFFECTS: set this.purchases to purchases
-    public void setPurchases(ArrayList<Item> purchases) {
-        this.purchases = purchases;
-    }
-
-    //MODIFIES: this
     //EFFECTS: set this.vip to vip
     public void setVip(boolean vip) {
         this.vip = vip;
@@ -57,8 +51,8 @@ public class Customer {
     }
 
     //EFFECTS: sum up the dollar value of all the customer's purchases
-    public int purchaseAmount() {
-        int purchaseTotalValue = 0;
+    public double purchaseAmount() {
+        double purchaseTotalValue = 0;
         for (Item item : purchases) {
             purchaseTotalValue += item.getPrice();
         }

@@ -132,7 +132,7 @@ public class CustomerDatabase {
 
         for (int i = 0; i < totalVipCustomer(); i++) {
             Customer vipGreatest = vip.get(0);
-            int greatestAmount = 0;
+            double greatestAmount = 0;
             for (Customer v : vip) {
                 if (v.purchaseAmount() > greatestAmount) {
                     greatestAmount = v.purchaseAmount();

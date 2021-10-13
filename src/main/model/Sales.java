@@ -58,12 +58,14 @@ public class Sales {
         totalSales += i.getPrice();
     }
 
-    //REQUIRES: i not to be null
+    //REQUIRES: i not to be null and size of soldItems to be larger than 0
     //MODIFIES: this
     //EFFECTS: delete a returned item
     public void deleteItemFromSold(Item i) {
-        soldItems.remove(i);
-        totalSales -= i.getPrice();
+        if (soldItems.size() > 0) {
+            soldItems.remove(i);
+            totalSales -= i.getPrice();
+        }
     }
 
     //REQUIRES: cd, c, i, s not to be null
