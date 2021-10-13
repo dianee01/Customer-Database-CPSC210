@@ -120,7 +120,7 @@ public class CustomerDatabaseTest {
     }
 
     @Test
-    void testAnnualUpdate() {
+    void testAnnualUpdate1() {
         //curent date 2020
         Date d2021 = new Date(2021);
         Item sofa = new Item("sofa", 1001.0, d2019);
@@ -135,6 +135,22 @@ public class CustomerDatabaseTest {
         assertEquals(testCustomer, cData.getCustomers());
         assertTrue(cData.getRegularCustomers().contains(one));
         assertTrue(cData.getVipCustomers().contains(two) && cData.getVipCustomers().contains(three));
+    }
+
+    @Test
+    void testAnnualUpdate2() {
+        //curent date 2020
+        Date d2021 = new Date(2021);
+        Item sofa = new Item("sofa", 1001.0, d2019);
+        customerOne.add(sofa);
+        one.setVip(true);
+        cData.getRegularCustomers().remove(one);
+        cData.getVipCustomers().add(one);
+        //now 2021
+        cData.annualUpdate(d2021);
+        assertEquals(testCustomer, cData.getCustomers());
+        assertTrue(cData.getRegularCustomers().contains(one) && cData.getRegularCustomers().contains(three));
+        assertTrue(cData.getVipCustomers().contains(two));
     }
 
     @Test
