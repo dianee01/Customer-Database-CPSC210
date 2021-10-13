@@ -1,9 +1,11 @@
 package model;
 
+import com.sun.tools.javac.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,29 +28,20 @@ public class CustomerDatabaseTest {
     private CustomerDatabase cData;
 
     @BeforeEach
-    @SuppressWarnings("methodlength")
     void setup() {
-        //this is the biggest class of my project so far and it uses many objects with reference to other
-        //objects, therefore it would be hard to condense it or separate it into two
         d2019 = new Date(2019);
         d2020 = new Date(2020);
         chair = new Item("chair", 450.5, d2020);
         desk = new Item("desk", 1000.0, d2020);
         bed = new Item("bed", 0.1, d2020);
-        customerOne = new ArrayList<>();
-        customerOne.add(chair);
-        customerTwo = new ArrayList<>();
-        customerTwo.add(desk);
-        customerThree = new ArrayList<>();
-        customerThree.add(bed);
+        customerOne = new ArrayList<>(Arrays.asList(chair));
+        customerTwo = new ArrayList<>(Arrays.asList(desk));
+        customerThree = new ArrayList<>(Arrays.asList(bed));
         one = new Customer("One", customerOne);
         two = new Customer("Two", customerTwo);
         three = new Customer("Three", customerThree);
         two.setVip(true);
-        customerList = new ArrayList<>();
-        customerList.add(one);
-        customerList.add(two);
-        customerList.add(three);
+        customerList = new ArrayList<>(Arrays.asList(one, two, three));
         cData = new CustomerDatabase(customerList);
         testCustomer = new ArrayList<>();
         testCustomer.addAll(customerList);
