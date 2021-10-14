@@ -15,7 +15,6 @@ public class ManageSales {
     public ManageSales(CustomerDatabase cusData, Sales mySales) {
         this.cusData = cusData;
         this.mySales = mySales;
-        runManageSales();
     }
 
 
@@ -49,6 +48,7 @@ public class ManageSales {
         System.out.println("\ti -> get total number of items sold");
         System.out.println("\tiy -> get total number of items sold in a particular year");
         System.out.println("\try -> get total revenue in a particular year");
+        System.out.println("\tq -> quit");
     }
 
     //MODIFIES: this
@@ -71,7 +71,11 @@ public class ManageSales {
 
     //EFFECTS: view total sold items in a list
     public void viewSoldItems() {
-        System.out.print(mySales.getSoldItems());
+        for (Item item : mySales.getSoldItems()) {
+            System.out.println("Item" + item.getItemName());
+            System.out.println("Price" + item.getPrice());
+            System.out.println("Purchase Date" + item.getPurchaseDate().getYear());
+        }
     }
 
     //EFFECTS: view total revenue created by the business
@@ -93,7 +97,7 @@ public class ManageSales {
         if (year >= 0) {
             System.out.print(mySales.itemCountPerYear(new Date(year)));
         } else {
-            System.out.print("Year cannot be smaller or equal to 0. Please re-enter.");
+            System.out.println("Year cannot be smaller or equal to 0. Please re-enter.");
         }
     }
 
@@ -106,7 +110,7 @@ public class ManageSales {
         if (year >= 0) {
             System.out.print(mySales.totalSalesPerYear(new Date(year)));
         } else {
-            System.out.print("Year cannot be smaller or equal to 0.");
+            System.out.println("Year cannot be smaller or equal to 0.");
         }
     }
 }

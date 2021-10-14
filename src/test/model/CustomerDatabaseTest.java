@@ -131,7 +131,7 @@ public class CustomerDatabaseTest {
         cData.getVipCustomers().add(one);
         customerThree.add(door);
         //now 2021
-        cData.annualUpdate(d2021);
+        cData.update(d2021);
         assertEquals(testCustomer, cData.getCustomers());
         assertTrue(cData.getRegularCustomers().contains(one));
         assertTrue(cData.getVipCustomers().contains(two) && cData.getVipCustomers().contains(three));
@@ -147,7 +147,7 @@ public class CustomerDatabaseTest {
         cData.getRegularCustomers().remove(one);
         cData.getVipCustomers().add(one);
         //now 2021
-        cData.annualUpdate(d2021);
+        cData.update(d2021);
         assertEquals(testCustomer, cData.getCustomers());
         assertTrue(cData.getRegularCustomers().contains(one) && cData.getRegularCustomers().contains(three));
         assertTrue(cData.getVipCustomers().contains(two));

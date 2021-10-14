@@ -15,7 +15,6 @@ public class ManageCustomer {
     public ManageCustomer(CustomerDatabase cusData, Sales mySales) {
         this.cusData = cusData;
         this.mySales = mySales;
-        runManageCustomer();
     }
 
     //MODIFIES: this
@@ -32,7 +31,7 @@ public class ManageCustomer {
             command = input.next();
             command = command.toLowerCase();
 
-            if (command == "q") {
+            if (command.equals("q")) {
                 keepGoing = false;
             } else {
                 processCommandCustomer(command);
@@ -52,6 +51,7 @@ public class ManageCustomer {
         System.out.println("\tac -> add customer");
         System.out.println("\tu -> update customers");
         System.out.println("\ts -> sort vip customers");
+        System.out.println("\tq -> quit");
     }
 
     //MODIFIES: this
@@ -84,17 +84,38 @@ public class ManageCustomer {
 
     //EFFECTS: view all existing customers in a list
     public void viewCustomers() {
-        System.out.print(cusData.getCustomers());
+        for (Customer c : cusData.getCustomers()) {
+            System.out.println("Customer Name: " + c.getName());
+            for (Item i : c.getPurchases()) {
+                System.out.println("Item: " + i.getItemName());
+                System.out.println("Price: " + i.getPrice());
+                System.out.println("Purchase Date: " + i.getPurchaseDate().getYear());
+            }
+        }
     }
 
     //EFFECTS: view all existing regular customers in a list
     public void viewRegularCustomers() {
-        System.out.print(cusData.getRegularCustomers());
+        for (Customer c : cusData.getRegularCustomers()) {
+            System.out.println("Customer Name: " + c.getName());
+            for (Item i : c.getPurchases()) {
+                System.out.println("Item: " + i.getItemName());
+                System.out.println("Price: " + i.getPrice());
+                System.out.println("Purchase Date: " + i.getPurchaseDate().getYear());
+            }
+        }
     }
 
     //EFFECTS: view all existing vip customers in a list
     public void viewVipCustomers() {
-        System.out.print(cusData.getVipCustomers());
+        for (Customer c : cusData.getVipCustomers()) {
+            System.out.println("Customer Name: " + c.getName());
+            for (Item i : c.getPurchases()) {
+                System.out.println("Item: " + i.getItemName());
+                System.out.println("Price: " + i.getPrice());
+                System.out.println("Purchase Date: " + i.getPurchaseDate().getYear());
+            }
+        }
     }
 
     //get different groups of customers' size
@@ -118,56 +139,53 @@ public class ManageCustomer {
     //EFFECTS: lets the user add a new user
     public void addCustomers() {
         System.out.print("How many customers do you want to add?");
-        System.out.print("Please enter: ");
         int customer = input.nextInt();
 
         if (customer > 0) {
-            addOneCustomer(customer);
+            for (int i = 0; i < customer; i++) {
+                addOneCustomer();
+            }
         } else {
-            System.out.print("The number of new customer cannot be zero.");
+            System.out.println("The number of new customer cannot be zero.");
         }
 
     }
 
     //MODIFIES: this
     //EFFECTS: add a single customer to customer database, helper function for addCustomers()
-    public void addOneCustomer(int numberCustomer) {
-        int customer = numberCustomer;
-        for (int i = 0; i < customer; i++) {
-            System.out.print("What is this customer's name?");
-            System.out.print("Please enter: ");
-            String name = input.next();
-            System.out.print("How many items did this customer's purchase?");
-            System.out.print("Please enter: ");
-            int purchase = input.nextInt();
-            if (!name.equals("") && purchase > 0) {
-                Customer c = new Customer("name", new ArrayList<Item>(purchase));
-                addPurchaseForCustomer(c);
-            } else {
-                System.out.print("The above answers cannot be empty or zero.");
-            }
+    public void addOneCustomer() {
+        System.out.print("What is this customer's name?");
+        String name = input.next();
+        System.out.print("How many items did this customer's purchase?");
+        int purchase = input.nextInt();
+        if (!name.equals("") && purchase > 0) {
+            Customer c = new Customer(name, new ArrayList<Item>());
+            cusData.addCustomer(c);
+            addPurchaseForCustomer(c, purchase);
+            System.out.println("Customer added successfully!");
+        } else {
+            System.out.println("The above answers cannot be empty or zero.");
         }
     }
 
     //MODIFIES: this
     //EFFECTS: add a single purchase to the customer, helper function for addOneCustomer(int numberCustomer)
-    public void addPurchaseForCustomer(Customer c) {
-        for (int i = 0; i < c.purchaseCount(); i++) {
-            System.out.print("What is the name of this item?");
-            System.out.print("Please enter: ");
+    public void addPurchaseForCustomer(Customer c, int purchase) {
+        for (int i = 0; i < purchase; i++) {
+            int order = i + 1;
+            System.out.print("What is the name of the " + order + " item?");
             String itemName = input.next();
             itemName = itemName.toLowerCase();
             System.out.print("What is the price of this item?");
-            System.out.print("Please enter: ");
             double itemPrice = input.nextDouble();
             System.out.print("What is the date of sales of this item?");
-            System.out.print("Please enter: ");
             int year = input.nextInt();
             if (!itemName.equals("") && itemPrice > 0.0 && year > 0) {
                 Item newItem = new Item(itemName, itemPrice, new Date(year));
                 c.addPurchase(newItem, mySales);
+                System.out.println("Item added successfully!");
             } else {
-                System.out.print("The above answers cannot be blank or empty.");
+                System.out.println("The above answers cannot be blank or empty.");
             }
         }
     }
@@ -176,21 +194,27 @@ public class ManageCustomer {
     //EFFECTS: lets the user update customer database
     public void updateCustomers() {
         System.out.print("What is the new current year?");
-        System.out.print("Please enter: ");
         int year = input.nextInt();
-        cusData.annualUpdate(new Date(year));
-        System.out.print("Update Complete!");
+        cusData.update(new Date(year));
+        System.out.println("Update Complete!");
     }
 
     //EFFECTS: lets the user sort his Vip customers
     public void sortVipCustomers() {
         System.out.print("Do you want to sort your current vip customers?");
-        System.out.print("Please enter: ");
         boolean sort = input.nextBoolean();
         if (sort) {
-            System.out.print(cusData.sortVip());
+            ArrayList<Customer> newList = cusData.sortVip();
+            for (Customer c : newList) {
+                System.out.println("Customer Name" + c.getName());
+                for (Item i : c.getPurchases()) {
+                    System.out.println("Item" + i.getItemName());
+                    System.out.println("Price" + i.getPrice());
+                    System.out.println("Purchase Date" + i.getPurchaseDate().getYear());
+                }
+            }
         } else {
-            System.out.print("You selected not to sort");
+            System.out.println("You selected not to sort");
         }
     }
 }

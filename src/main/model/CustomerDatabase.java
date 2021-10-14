@@ -81,7 +81,7 @@ public class CustomerDatabase {
     //REQUIRES: date d not to be null
     //MODIFIES: this
     //EFFECTS: check for vip and regular customers' purchased amount in the last year, update accordingly
-    public void annualUpdate(Date d) {
+    public void update(Date d) {
         for (Customer c : customers) {
             double totalPurchasesLastYear = 0;
             for (Item i : c.getPurchases()) {
