@@ -15,6 +15,8 @@ public class Sales {
         }
     }
 
+    //Getters
+
     public double getTotalSales() {
         return totalSales;
     }
@@ -22,6 +24,8 @@ public class Sales {
     public ArrayList<Item> getSoldItems() {
         return soldItems;
     }
+
+    //Methods
 
     //EFFECTS: return the number of sold items
     public int itemCount() {
