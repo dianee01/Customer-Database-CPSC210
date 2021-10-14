@@ -8,17 +8,24 @@ import java.util.Scanner;
 public class ManageSales {
 
     private Scanner input;
+    private Sales mySales;
     private CustomerDatabase cusData;
 
-    public ManageSales() {
+    //EFFECTS: run ManageSales
+    public ManageSales(CustomerDatabase cusData, Sales mySales) {
+        this.cusData = cusData;
+        this.mySales = mySales;
         runManageSales();
     }
 
+
+    //MODIFIES: this
+    //EFFECTS: process user input
     public void runManageSales() {
         boolean keepGoing = true;
         String command = null;
 
-        cusData = new CustomerDatabase(new ArrayList<Customer>());
+        mySales = new Sales(new ArrayList<Item>());
         input = new Scanner(System.in);
 
         while (keepGoing) {
@@ -34,6 +41,7 @@ public class ManageSales {
         }
     }
 
+    //EFFECTS: displays main menu
     public void displayMenuSales() {
         System.out.println("\nSelect from:");
         System.out.println("\ts -> view all sold items");
@@ -43,6 +51,8 @@ public class ManageSales {
         System.out.println("\try -> get total revenue in a particular year");
     }
 
+    //MODIFIES: this
+    //EFFECTS: process user command
     public void processCommandSales(String command) {
         if (command.equals("s")) {
             viewSoldItems();
@@ -59,23 +69,44 @@ public class ManageSales {
         }
     }
 
+    //EFFECTS: view total sold items in a list
     public void viewSoldItems() {
-
+        System.out.print(mySales.getSoldItems());
     }
 
+    //EFFECTS: view total revenue created by the business
     public void viewTotalRevenue() {
-
+        System.out.print(mySales.getTotalSales());
     }
 
+    //EFFECTS: view the total number of items sold
     public void numberItemSold() {
-
+        System.out.print(mySales.itemCount());
     }
 
+    //EFFECTS: view the total number of items sold in a particular year
     public void numberItemSoldInYear() {
+        System.out.print("Which year do you want to see?");
+        System.out.print("Please enter: ");
+        int year = input.nextInt();
 
+        if (year >= 0) {
+            System.out.print(mySales.itemCountPerYear(new Date(year)));
+        } else {
+            System.out.print("Year cannot be smaller or equal to 0. Please re-enter.");
+        }
     }
 
+    //EFFECTS: view the total revenue created in a particular year
     public void totalRevenueInYear() {
+        System.out.print("Which year do you want to see?");
+        System.out.print("Please enter: ");
+        int year = input.nextInt();
 
+        if (year >= 0) {
+            System.out.print(mySales.totalSalesPerYear(new Date(year)));
+        } else {
+            System.out.print("Year cannot be smaller or equal to 0.");
+        }
     }
 }
