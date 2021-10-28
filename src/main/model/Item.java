@@ -1,5 +1,6 @@
 package model;
 
+//Creates an item that is sold to a customer that contains a name, a price, and a purchased date
 public class Item {
     private String itemName;
     private double price;

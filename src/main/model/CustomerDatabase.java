@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+//A customerDatabase has a list of customers, which get sorted into lis of regular customers and vip customers based on
+//their vip status, after each customer is added, the user must update the database to sort the customers correctly
 public class CustomerDatabase {
     private ArrayList<Customer> customers;
     private ArrayList<Customer> regularCustomers;

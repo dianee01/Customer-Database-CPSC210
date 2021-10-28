@@ -8,8 +8,9 @@ import model.Sales;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// This class references code from this TellerApp
-// Link: https://github.students.cs.ubc.ca/CPSC210/TellerApp
+//This class references code from this TellerApp
+//Link: https://github.students.cs.ubc.ca/CPSC210/TellerApp
+//The main ui, which will be separated into the customer view or sales view
 public class CustomerDatabaseApp {
 
     private Scanner input;

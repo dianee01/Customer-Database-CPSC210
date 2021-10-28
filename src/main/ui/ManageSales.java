@@ -5,6 +5,7 @@ import model.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//This is the interface that allows the user to modify or get data of its sales history and overview
 public class ManageSales {
 
     private Scanner input;

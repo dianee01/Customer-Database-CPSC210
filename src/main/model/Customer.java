@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+//Creates a customer that has a name, a list of purchases, and a determination of whether the customer is a vip or not
 public class Customer {
     private String name;
     private ArrayList<Item> purchases;

@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//Tests Sales class in model
 public class SalesTest {
     private Date d2019;
     private Date d2020;

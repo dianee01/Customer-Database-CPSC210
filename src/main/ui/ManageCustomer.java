@@ -5,6 +5,7 @@ import model.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//This is the interface where the user can modify its customer database
 public class ManageCustomer {
 
     private Scanner input;
@@ -51,6 +52,7 @@ public class ManageCustomer {
         System.out.println("\tac -> add customer");
         System.out.println("\tu -> update customers");
         System.out.println("\ts -> sort vip customers");
+        System.out.println("\tap -> add a new purchase for a selected customer");
         System.out.println("\tq -> quit");
     }
 
@@ -75,6 +77,8 @@ public class ManageCustomer {
             updateCustomers();
         } else if (command.equals("s")) {
             sortVipCustomers();
+        } else if (command.equals("ap")) {
+            addPurchaseSelect();
         } else {
             System.out.println("Selection not valid!");
         }
@@ -169,7 +173,7 @@ public class ManageCustomer {
     }
 
     //MODIFIES: this
-    //EFFECTS: add a single purchase to the customer, helper function for addOneCustomer(int numberCustomer)
+    //EFFECTS: add purchases to the customer, helper function for addOneCustomer(int numberCustomer)
     public void addPurchaseForCustomer(Customer c, int purchase) {
         for (int i = 0; i < purchase; i++) {
             int order = i + 1;
@@ -186,6 +190,22 @@ public class ManageCustomer {
                 System.out.println("Item added successfully!");
             } else {
                 System.out.println("The above answers cannot be blank or empty.");
+            }
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: add a new purchase to the customer the user selected
+    public void addPurchaseSelect() {
+        System.out.print("Which customer made a new purchase?");
+        String name = input.next();
+
+        for (Customer c: cusData.getCustomers()) {
+            if (c.getName().equals(name)) {
+                System.out.print("Customer found");
+                addPurchaseForCustomer(c, 1);
+            } else {
+                System.out.print("Customer not found");
             }
         }
     }

@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+//Sales is a list of sold items, and can allow the user to see how much sales they are generating with their business
 public class Sales {
     private ArrayList<Item> soldItems;
     private double totalSales;

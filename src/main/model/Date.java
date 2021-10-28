@@ -1,5 +1,6 @@
 package model;
 
+//create a date with its year only, as well as a boolean that determines whether the date can be updated or not
 public class Date {
     private int year;
     private boolean update;

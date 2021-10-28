@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//Tests Customer class in model
 class CustomerTest {
     private Customer c;
     private Date d2019;

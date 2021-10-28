@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//Tests Item class in model
 public class ItemTest {
     private Date d;
     private Item chair;

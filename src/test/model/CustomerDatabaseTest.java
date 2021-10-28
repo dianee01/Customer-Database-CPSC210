@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//Tests CustomerDatabase class in model
 public class CustomerDatabaseTest {
     Customer one;
     Customer two;

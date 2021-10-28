@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//Tests Date Class in Model
 public class DateTest {
     private Date date;
     private Date dateSetTrueUpdate;
