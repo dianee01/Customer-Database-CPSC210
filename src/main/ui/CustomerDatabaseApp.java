@@ -4,23 +4,34 @@ import model.Customer;
 import model.CustomerDatabase;
 import model.Item;
 import model.Sales;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 //This class references code from this TellerApp
 //Link: https://github.students.cs.ubc.ca/CPSC210/TellerApp
+//This class references code from this JsonSerializationDemo
+//Link: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 //The main ui, which will be separated into the customer view or sales view
 public class CustomerDatabaseApp {
+
+    public static final String JSON_STORE = "./data/CustomerDatabase.json";
 
     private Scanner input;
     private CustomerDatabase cusData;
     private Sales mySales;
     private ManageCustomer mc;
     private ManageSales ms;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     //EFFECTS: run the CustomerDatabase App
-    public CustomerDatabaseApp() {
+    public CustomerDatabaseApp()throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runCustomerDatabase();
     }
 
@@ -62,7 +73,7 @@ public class CustomerDatabaseApp {
     //EFFECTS: process user command
     public void processCommandMain(String command) {
         if (command.equals("c")) {
-            mc.runManageCustomer();
+            mc.runManageCustomer(jsonWriter, jsonReader);
         } else if (command.equals("s")) {
             ms.runManageSales();
         } else {

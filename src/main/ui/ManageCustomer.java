@@ -1,7 +1,11 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,7 +24,7 @@ public class ManageCustomer {
 
     //MODIFIES: this
     //EFFECTS: process user input
-    public void runManageCustomer() {
+    public void runManageCustomer(JsonWriter jsonWriter, JsonReader jsonReader) {
         boolean keepGoing = true;
         String command = null;
 
@@ -35,7 +39,7 @@ public class ManageCustomer {
             if (command.equals("q")) {
                 keepGoing = false;
             } else {
-                processCommandCustomer(command);
+                processCommandCustomer(command, jsonWriter, jsonReader);
             }
         }
     }
@@ -53,18 +57,16 @@ public class ManageCustomer {
         System.out.println("\tu -> update customers");
         System.out.println("\ts -> sort vip customers");
         System.out.println("\tap -> add a new purchase for a selected customer");
+        System.out.println("\tsave -> save work room to file");
+        System.out.println("\tload -> load work room from file");
         System.out.println("\tq -> quit");
     }
 
     //MODIFIES: this
     //EFFECTS: process user command
-    public void processCommandCustomer(String command) {
-        if (command.equals("c")) {
-            viewCustomers();
-        } else if (command.equals("r")) {
-            viewRegularCustomers();
-        } else if (command.equals("v")) {
-            viewVipCustomers();
+    public void processCommandCustomer(String command, JsonWriter jsonWriter, JsonReader jsonReader) {
+        if (command.equals("c") || command.equals("r") || command.equals("v")) {
+            viewTheCustomers(command);
         } else if (command.equals("csize")) {
             numberCustomers();
         } else if (command.equals("rsize")) {
@@ -79,8 +81,32 @@ public class ManageCustomer {
             sortVipCustomers();
         } else if (command.equals("ap")) {
             addPurchaseSelect();
+        } else if (command.equals("save") || command.equals("load")) {
+            saveAndLoad(command, jsonWriter, jsonReader);
         } else {
             System.out.println("Selection not valid!");
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: helps processCommandCustomer to be save and load
+    public void saveAndLoad(String command, JsonWriter jsonWriter, JsonReader jsonReader) {
+        if (command.equals("save")) {
+            saveCustomersUpdate(jsonWriter);
+        } else if (command.equals("load")) {
+            loadCustomers(jsonReader);
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: helps processCommandCustomer to be save and load
+    public void viewTheCustomers(String command) {
+        if (command.equals("c")) {
+            viewCustomers();
+        } else if (command.equals("r")) {
+            viewRegularCustomers();
+        } else if (command.equals("v")) {
+            viewVipCustomers();
         }
     }
 
@@ -235,6 +261,29 @@ public class ManageCustomer {
             }
         } else {
             System.out.println("You selected not to sort");
+        }
+    }
+
+    // EFFECTS: saves customers update to file
+    private void saveCustomersUpdate(JsonWriter jsonWriter) {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(cusData);
+            jsonWriter.close();
+            System.out.println("Saved to " + CustomerDatabaseApp.JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + CustomerDatabaseApp.JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads customers from file
+    private void loadCustomers(JsonReader jsonReader) {
+        try {
+            cusData = jsonReader.read();
+            System.out.println("Loaded from " + CustomerDatabaseApp.JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + CustomerDatabaseApp.JSON_STORE);
         }
     }
 }
