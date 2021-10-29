@@ -30,14 +30,14 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of customer database to file
-    public void write(CustomerDatabase cd) {
+    public void writeCD(CustomerDatabase cd) {
         JSONObject json = cd.toJson();
         saveToFile(json.toString(TAB));
     }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of sales to file
-    public void write(Sales s) {
+    public void writeSales(Sales s) {
         JSONObject json = s.toJson();
         saveToFile(json.toString(TAB));
     }

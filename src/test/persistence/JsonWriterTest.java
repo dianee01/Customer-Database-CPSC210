@@ -1,9 +1,6 @@
 package persistence;
 
-import model.Customer;
-import model.CustomerDatabase;
-import model.Date;
-import model.Item;
+import model.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -34,7 +31,7 @@ public class JsonWriterTest extends JsonTest{
             CustomerDatabase cd = new CustomerDatabase(new ArrayList<Customer>());
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyCustomerDatabase.json");
             writer.open();
-            writer.write(cd);
+            writer.writeCD(cd);
             writer.close();
 
             JsonCustomerDatabaseReader reader =
@@ -49,7 +46,7 @@ public class JsonWriterTest extends JsonTest{
     }
 
     @Test
-    void testWriterGeneralData() {
+    void testWriterGeneralCD() {
         try {
             CustomerDatabase cd = new CustomerDatabase(new ArrayList<Customer>());
             //customer one
@@ -68,20 +65,20 @@ public class JsonWriterTest extends JsonTest{
             cd.addCustomer(customerTwo);
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralCustomerDatabase.json");
             writer.open();
-            writer.write(cd);
+            writer.writeCD(cd);
             writer.close();
 
             JsonCustomerDatabaseReader reader =
                     new JsonCustomerDatabaseReader("./data/testWriterGeneralCustomerDatabase.json");
             cd = reader.read();
-            testHelperForWriterGeneralRead(cd, d1, d2);
+            testHelperForWriterGeneralCD(cd, d1, d2);
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
 
-    void testHelperForWriterGeneralRead(CustomerDatabase cd, Date d1, Date d2) {
+    void testHelperForWriterGeneralCD(CustomerDatabase cd, Date d1, Date d2) {
         //all customers
         List<Customer> allCustomers = cd.getCustomers();
         assertEquals(2, allCustomers.size());
@@ -105,5 +102,42 @@ public class JsonWriterTest extends JsonTest{
         List<Customer> vipCustomers = cd.getVipCustomers();
         assertEquals(1, vipCustomers.size());
         checkCustomer("Eva", purchase2, true, vipCustomers.get(0));
+    }
+
+    @Test
+    void testWriterGeneralSales() {
+        try {
+            //all purchases
+            ArrayList<Item> allSoldItems = new ArrayList<>();
+            Sales s = new Sales(allSoldItems);
+            //purchase one
+            allSoldItems.add(new Item("Chair",5.0, new Date(2020)));
+            //purchase two
+            allSoldItems.add(new Item("Desk",1000.0, new Date(2021)));
+            //check for purchases
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralSales.json");
+            writer.open();
+            writer.writeSales(s);
+            writer.close();
+
+            JsonSalesReader reader =
+                    new JsonSalesReader("./data/testWriterGeneralSales.json");
+            s = reader.read();
+            testHelperForWriterGeneralSales(s);
+
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
+
+    void testHelperForWriterGeneralSales(Sales s) {
+        //all purchases
+        ArrayList<Item> allSoldItems = new ArrayList<>();
+        //purchase one
+        allSoldItems.add(new Item("Chair",5.0, new Date(2020)));
+        //purchase two
+        allSoldItems.add(new Item("Desk",1000.0, new Date(2021)));
+        //check for purchases
+        checkSales(allSoldItems, 1005.0, s);
     }
 }

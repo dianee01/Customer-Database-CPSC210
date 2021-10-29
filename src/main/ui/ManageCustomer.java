@@ -272,7 +272,7 @@ public class ManageCustomer {
     private void saveCustomersUpdate(JsonWriter jsonWriterCD) {
         try {
             jsonWriterCD.open();
-            jsonWriterCD.write(cusData);
+            jsonWriterCD.writeCD(cusData);
             jsonWriterCD.close();
             System.out.println("Saved to " + CustomerDatabaseApp.JSON_STORE_CD);
         } catch (FileNotFoundException e) {
@@ -284,7 +284,7 @@ public class ManageCustomer {
     private void saveSalesUpdate(JsonWriter jsonWriterSales) {
         try {
             jsonWriterSales.open();
-            jsonWriterSales.write(mySales);
+            jsonWriterSales.writeSales(mySales);
             jsonWriterSales.close();
             System.out.println("Saved to " + CustomerDatabaseApp.JSON_STORE_S);
         } catch (FileNotFoundException e) {
