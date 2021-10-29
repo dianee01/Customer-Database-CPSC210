@@ -37,7 +37,8 @@ public class JsonWriterTest extends JsonTest{
             writer.write(cd);
             writer.close();
 
-            JsonCustomerDatabaseReader reader = new JsonCustomerDatabaseReader("./data/testWriterEmptyCustomerDatabase.json");
+            JsonCustomerDatabaseReader reader =
+                    new JsonCustomerDatabaseReader("./data/testWriterEmptyCustomerDatabase.json");
             cd = reader.read();
             assertEquals(0, cd.totalCustomerSize());
             assertEquals(0, cd.totalRegularCustomer());
@@ -70,7 +71,8 @@ public class JsonWriterTest extends JsonTest{
             writer.write(cd);
             writer.close();
 
-            JsonCustomerDatabaseReader reader = new JsonCustomerDatabaseReader("./data/testWriterGeneralCustomerDatabase.json");
+            JsonCustomerDatabaseReader reader =
+                    new JsonCustomerDatabaseReader("./data/testWriterGeneralCustomerDatabase.json");
             cd = reader.read();
             testHelperForWriterGeneralRead(cd, d1, d2);
 

@@ -270,9 +270,9 @@ public class ManageCustomer {
             jsonWriter.open();
             jsonWriter.write(cusData);
             jsonWriter.close();
-            System.out.println("Saved to " + CustomerDatabaseApp.JSON_STORE);
+            System.out.println("Saved to " + CustomerDatabaseApp.JSON_STORE_CD);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + CustomerDatabaseApp.JSON_STORE);
+            System.out.println("Unable to write to file: " + CustomerDatabaseApp.JSON_STORE_CD);
         }
     }
 
@@ -281,9 +281,9 @@ public class ManageCustomer {
     private void loadCustomers(JsonCustomerDatabaseReader jsonCustomerDatabaseReader) {
         try {
             cusData = jsonCustomerDatabaseReader.read();
-            System.out.println("Loaded from " + CustomerDatabaseApp.JSON_STORE);
+            System.out.println("Loaded from " + CustomerDatabaseApp.JSON_STORE_CD);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + CustomerDatabaseApp.JSON_STORE);
+            System.out.println("Unable to read from file: " + CustomerDatabaseApp.JSON_STORE_CD);
         }
     }
 }

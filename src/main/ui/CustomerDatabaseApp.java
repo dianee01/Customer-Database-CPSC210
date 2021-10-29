@@ -5,6 +5,7 @@ import model.CustomerDatabase;
 import model.Item;
 import model.Sales;
 import persistence.JsonCustomerDatabaseReader;
+import persistence.JsonSalesReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
@@ -18,7 +19,8 @@ import java.util.Scanner;
 //The main ui, which will be separated into the customer view or sales view
 public class CustomerDatabaseApp {
 
-    public static final String JSON_STORE = "./data/CustomerDatabase.json";
+    public static final String JSON_STORE_CD = "./data/CustomerDatabase.json";
+    public static final String JSON_STORE_S = "./data/Sales.json";
 
     private Scanner input;
     private CustomerDatabase cusData;
@@ -27,11 +29,13 @@ public class CustomerDatabaseApp {
     private ManageSales ms;
     private JsonWriter jsonWriter;
     private JsonCustomerDatabaseReader jsonCustomerDatabaseReader;
+    private JsonSalesReader jsonSalesReader;
 
     //EFFECTS: run the CustomerDatabase App
     public CustomerDatabaseApp()throws FileNotFoundException {
-        jsonWriter = new JsonWriter(JSON_STORE);
-        jsonCustomerDatabaseReader = new JsonCustomerDatabaseReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE_CD);
+        jsonCustomerDatabaseReader = new JsonCustomerDatabaseReader(JSON_STORE_CD);
+        jsonSalesReader = new JsonSalesReader(JSON_STORE_S);
         runCustomerDatabase();
     }
 
