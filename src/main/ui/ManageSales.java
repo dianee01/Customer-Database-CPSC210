@@ -1,8 +1,10 @@
 package ui;
 
 import model.*;
+import persistence.JsonCustomerDatabaseReader;
 import persistence.JsonSalesReader;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,7 +39,7 @@ public class ManageSales {
             if (command.equals("q")) {
                 keepGoing = false;
             } else {
-                processCommandSales(command);
+                processCommandSales(command, jsonSalesReader);
             }
         }
     }
@@ -50,12 +52,13 @@ public class ManageSales {
         System.out.println("\ti -> get total number of items sold");
         System.out.println("\tiy -> get total number of items sold in a particular year");
         System.out.println("\try -> get total revenue in a particular year");
+        System.out.println("\tload -> load work room from file");
         System.out.println("\tq -> quit");
     }
 
     //MODIFIES: this
     //EFFECTS: process user command
-    public void processCommandSales(String command) {
+    public void processCommandSales(String command, JsonSalesReader jsonSalesReader) {
         if (command.equals("s")) {
             viewSoldItems();
         } else if (command.equals("r")) {
@@ -66,8 +69,11 @@ public class ManageSales {
             numberItemSoldInYear();
         } else if (command.equals("ry")) {
             totalRevenueInYear();
+        } else if (command.equals("load")) {
+            loadSales(jsonSalesReader);
         } else {
             System.out.println("Selection not valid!");
+
         }
     }
 
@@ -113,6 +119,17 @@ public class ManageSales {
             System.out.print(mySales.totalSalesPerYear(new Date(year)));
         } else {
             System.out.println("Year cannot be smaller or equal to 0.");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads sales from file
+    private void loadSales(JsonSalesReader jsonSalesReader) {
+        try {
+            mySales = jsonSalesReader.read();
+            System.out.println("Loaded from " + CustomerDatabaseApp.JSON_STORE_S);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + CustomerDatabaseApp.JSON_STORE_S);
         }
     }
 }

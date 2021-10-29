@@ -95,8 +95,7 @@ public class ManageCustomer {
     public void saveAndLoad(String command, JsonWriter jsonWriterCD, JsonWriter jsonWriterSales,
                             JsonCustomerDatabaseReader jsonCustomerDatabaseReader) {
         if (command.equals("save")) {
-            saveCustomersUpdate(jsonWriterCD);
-            saveSalesUpdate(jsonWriterSales);
+            saveUpdate(jsonWriterCD, jsonWriterSales);
         } else if (command.equals("load")) {
             loadCustomers(jsonCustomerDatabaseReader);
         }
@@ -268,26 +267,19 @@ public class ManageCustomer {
         }
     }
 
-    // EFFECTS: saves customers update to file
-    private void saveCustomersUpdate(JsonWriter jsonWriterCD) {
+    // EFFECTS: saves all data update to file
+    private void saveUpdate(JsonWriter jsonWriterCD, JsonWriter jsonWriterSales) {
         try {
             jsonWriterCD.open();
             jsonWriterCD.writeCD(cusData);
             jsonWriterCD.close();
             System.out.println("Saved to " + CustomerDatabaseApp.JSON_STORE_CD);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + CustomerDatabaseApp.JSON_STORE_CD);
-        }
-    }
-
-    // EFFECTS: saves sales update to file
-    private void saveSalesUpdate(JsonWriter jsonWriterSales) {
-        try {
             jsonWriterSales.open();
             jsonWriterSales.writeSales(mySales);
             jsonWriterSales.close();
             System.out.println("Saved to " + CustomerDatabaseApp.JSON_STORE_S);
         } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + CustomerDatabaseApp.JSON_STORE_CD);
             System.out.println("Unable to write to file: " + CustomerDatabaseApp.JSON_STORE_S);
         }
     }

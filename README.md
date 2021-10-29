@@ -27,7 +27,6 @@ This project can be used by many stores to track their customers and sales. It c
 **Planned for Phase 2**
 - As a user, I want to be able to save my customer database to file
 - As a user, I want to be able to be able to load my customer database from file
-- As a user, I want to have loaded data available when I switch from viewing my customer to viewing sales
 
 **Planned: class and test cases developed, missing ui**
 - As a user, I want to be able to see the amount of sold items in total
@@ -37,5 +36,6 @@ This project can be used by many stores to track their customers and sales. It c
 - As a user, I want to be able to select a customer and add a new item they purchased with associated dollar amount
 - As a user, I want to be able to delete a returned item from the customer's items and total sales
 - As a user, I want to be able to delete a customer from the list if they returned the only item they bought
+- As a user, I want to have loaded data available when I switch from viewing my customer to viewing sales
 
 
