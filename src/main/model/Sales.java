@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 //Sales is a list of sold items, and can allow the user to see how much sales they are generating with their business
-public class Sales {
+public class Sales implements Writable {
     private ArrayList<Item> soldItems;
     private double totalSales;
 
@@ -79,5 +83,24 @@ public class Sales {
     public void returnItem(CustomerDatabase cd, Customer c, Item i, Sales s) {
         c.deletePurchase(i, s);
         cd.removeRegularCustomer(c);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("soldItems", itemsToJson());
+        json.put("totalSales", totalSales);
+        return json;
+    }
+
+    //EFFECTS: returns items sold as a JSON array
+    private JSONArray itemsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item i : soldItems) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
     }
 }

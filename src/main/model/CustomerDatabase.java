@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 //A customerDatabase has a list of customers, which get sorted into lis of regular customers and vip customers based on
 //their vip status, after each customer is added, the user must update the database to sort the customers correctly
-public class CustomerDatabase {
+public class CustomerDatabase implements Writable {
     private ArrayList<Customer> customers;
     private ArrayList<Customer> regularCustomers;
     private ArrayList<Customer> vipCustomers;
@@ -129,4 +133,45 @@ public class CustomerDatabase {
         return vipSorted;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("customers", cusListToJson());
+        json.put("regularCustomers", regCusListToJson());
+        json.put("vipCustomers", vipCusListToJson());
+        return json;
+    }
+
+    //EFFECTS: returns all the customers as a JSON array
+    private JSONArray cusListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Customer c : customers) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    //EFFECTS: returns regular customers as a JSON array
+    private JSONArray regCusListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Customer c : regularCustomers) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    //EFFECTS: returns vip customers as a JSON array
+    private JSONArray vipCusListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Customer c : vipCustomers) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
+    }
 }

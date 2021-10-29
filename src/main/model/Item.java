@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 //Creates an item that is sold to a customer that contains a name, a price, and a purchased date
-public class Item {
+public class Item implements Writable {
     private String itemName;
     private double price;
     private Date purchaseDate;
@@ -49,4 +52,12 @@ public class Item {
         this.purchaseDate = d;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("itemName", itemName);
+        json.put("price", price);
+        json.put("purchaseDate", purchaseDate);
+        return json;
+    }
 }

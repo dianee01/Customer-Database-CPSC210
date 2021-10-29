@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 //Creates a customer that has a name, a list of purchases, and a determination of whether the customer is a vip or not
-public class Customer {
+public class Customer implements Writable {
     private String name;
     private ArrayList<Item> purchases;
     private boolean vip;
@@ -76,5 +80,25 @@ public class Customer {
             s.deleteItemFromSold(i);
             purchases.remove(i);
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("purchases", customerToJson());
+        json.put("vip", vip);
+        return json;
+    }
+
+    //EFFECTS: returns purchases of this customer as a JSON array
+    private JSONArray customerToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item i : purchases) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
     }
 }
