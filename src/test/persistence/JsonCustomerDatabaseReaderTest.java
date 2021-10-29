@@ -15,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 //This class references code from this JsonSerializationDemo
 //Link: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-public class JsonReaderTest extends JsonTest{
+public class JsonCustomerDatabaseReaderTest extends JsonTest{
     @Test
     void testReaderNonExistentFile() {
-        JsonReader reader = new JsonReader("./data/noSuchFile.json");
+        JsonCustomerDatabaseReader reader = new JsonCustomerDatabaseReader("./data/noSuchFile.json");
         try {
             CustomerDatabase cr = reader.read();
             fail("IOException expected");
@@ -29,7 +29,8 @@ public class JsonReaderTest extends JsonTest{
 
     @Test
     void testReaderEmptyCustomerDatabase() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyCustomerDatabase.json");
+        JsonCustomerDatabaseReader reader = new
+                JsonCustomerDatabaseReader("./data/testReaderEmptyCustomerDatabase.json");
         try {
             CustomerDatabase cd = reader.read();
             assertEquals(0, cd.totalCustomerSize());
@@ -42,7 +43,8 @@ public class JsonReaderTest extends JsonTest{
 
     @Test
     void testReaderGeneralCustomerDatabase() {
-        JsonReader reader = new JsonReader("./data/testReaderGeneralCustomerDatabase.json");
+        JsonCustomerDatabaseReader reader = new
+                JsonCustomerDatabaseReader("./data/testReaderGeneralCustomerDatabase.json");
         try {
             CustomerDatabase cd = reader.read();
 

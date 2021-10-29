@@ -1,0 +1,21 @@
+{
+  "soldItems": [
+    {
+      "itemName": "Chair",
+      "price": 5.0,
+      "purchaseDate": {
+        "year": 2020,
+        "update": false
+      }
+    },
+    {
+      "itemName": "Desk",
+      "price": 1000.0,
+      "purchaseDate": {
+        "year": 2021,
+        "update": false
+      }
+    }
+  ],
+  "totalSales": 1005
+}

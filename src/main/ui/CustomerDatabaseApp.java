@@ -4,7 +4,7 @@ import model.Customer;
 import model.CustomerDatabase;
 import model.Item;
 import model.Sales;
-import persistence.JsonReader;
+import persistence.JsonCustomerDatabaseReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
@@ -26,12 +26,12 @@ public class CustomerDatabaseApp {
     private ManageCustomer mc;
     private ManageSales ms;
     private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private JsonCustomerDatabaseReader jsonCustomerDatabaseReader;
 
     //EFFECTS: run the CustomerDatabase App
     public CustomerDatabaseApp()throws FileNotFoundException {
         jsonWriter = new JsonWriter(JSON_STORE);
-        jsonReader = new JsonReader(JSON_STORE);
+        jsonCustomerDatabaseReader = new JsonCustomerDatabaseReader(JSON_STORE);
         runCustomerDatabase();
     }
 
@@ -73,7 +73,7 @@ public class CustomerDatabaseApp {
     //EFFECTS: process user command
     public void processCommandMain(String command) {
         if (command.equals("c")) {
-            mc.runManageCustomer(jsonWriter, jsonReader);
+            mc.runManageCustomer(jsonWriter, jsonCustomerDatabaseReader);
         } else if (command.equals("s")) {
             ms.runManageSales();
         } else {

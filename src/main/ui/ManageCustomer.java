@@ -1,7 +1,7 @@
 package ui;
 
 import model.*;
-import persistence.JsonReader;
+import persistence.JsonCustomerDatabaseReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
@@ -24,7 +24,7 @@ public class ManageCustomer {
 
     //MODIFIES: this
     //EFFECTS: process user input
-    public void runManageCustomer(JsonWriter jsonWriter, JsonReader jsonReader) {
+    public void runManageCustomer(JsonWriter jsonWriter, JsonCustomerDatabaseReader jsonCustomerDatabaseReader) {
         boolean keepGoing = true;
         String command = null;
 
@@ -39,7 +39,7 @@ public class ManageCustomer {
             if (command.equals("q")) {
                 keepGoing = false;
             } else {
-                processCommandCustomer(command, jsonWriter, jsonReader);
+                processCommandCustomer(command, jsonWriter, jsonCustomerDatabaseReader);
             }
         }
     }
@@ -64,7 +64,7 @@ public class ManageCustomer {
 
     //MODIFIES: this
     //EFFECTS: process user command
-    public void processCommandCustomer(String command, JsonWriter jsonWriter, JsonReader jsonReader) {
+    public void processCommandCustomer(String command, JsonWriter jsonWriter, JsonCustomerDatabaseReader jsonCustomerDatabaseReader) {
         if (command.equals("c") || command.equals("r") || command.equals("v")) {
             viewTheCustomers(command);
         } else if (command.equals("csize")) {
@@ -82,7 +82,7 @@ public class ManageCustomer {
         } else if (command.equals("ap")) {
             addPurchaseSelect();
         } else if (command.equals("save") || command.equals("load")) {
-            saveAndLoad(command, jsonWriter, jsonReader);
+            saveAndLoad(command, jsonWriter, jsonCustomerDatabaseReader);
         } else {
             System.out.println("Selection not valid!");
         }
@@ -90,11 +90,11 @@ public class ManageCustomer {
 
     //MODIFIES: this
     //EFFECTS: helps processCommandCustomer to be save and load
-    public void saveAndLoad(String command, JsonWriter jsonWriter, JsonReader jsonReader) {
+    public void saveAndLoad(String command, JsonWriter jsonWriter, JsonCustomerDatabaseReader jsonCustomerDatabaseReader) {
         if (command.equals("save")) {
             saveCustomersUpdate(jsonWriter);
         } else if (command.equals("load")) {
-            loadCustomers(jsonReader);
+            loadCustomers(jsonCustomerDatabaseReader);
         }
     }
 
@@ -278,9 +278,9 @@ public class ManageCustomer {
 
     // MODIFIES: this
     // EFFECTS: loads customers from file
-    private void loadCustomers(JsonReader jsonReader) {
+    private void loadCustomers(JsonCustomerDatabaseReader jsonCustomerDatabaseReader) {
         try {
-            cusData = jsonReader.read();
+            cusData = jsonCustomerDatabaseReader.read();
             System.out.println("Loaded from " + CustomerDatabaseApp.JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + CustomerDatabaseApp.JSON_STORE);

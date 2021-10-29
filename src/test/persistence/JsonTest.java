@@ -2,6 +2,7 @@ package persistence;
 
 import model.Customer;
 import model.Item;
+import model.Sales;
 
 import java.util.ArrayList;
 
@@ -19,5 +20,14 @@ public class JsonTest {
                     c.getPurchases().get(i).getPurchaseDate().getYear());
         }
         assertEquals(vip, c.isVip());
+    }
+    protected void checkSales(ArrayList<Item> purchases, double totalSales, Sales s) {
+        assertEquals(totalSales, s.getTotalSales());
+        for (int i = 0; i < purchases.size(); i++) {
+            assertEquals(purchases.get(i).getItemName(), s.getSoldItems().get(i).getItemName());
+            assertEquals(purchases.get(i).getPrice(), s.getSoldItems().get(i).getPrice());
+            assertEquals(purchases.get(i).getPurchaseDate().getYear(),
+                    s.getSoldItems().get(i).getPurchaseDate().getYear());
+        }
     }
 }
