@@ -1,6 +1,7 @@
 package persistence;
 
 import model.CustomerDatabase;
+import model.Sales;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -31,6 +32,13 @@ public class JsonWriter {
     // EFFECTS: writes JSON representation of customer database to file
     public void write(CustomerDatabase cd) {
         JSONObject json = cd.toJson();
+        saveToFile(json.toString(TAB));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of sales to file
+    public void write(Sales s) {
+        JSONObject json = s.toJson();
         saveToFile(json.toString(TAB));
     }
 

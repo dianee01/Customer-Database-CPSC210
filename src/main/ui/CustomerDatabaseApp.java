@@ -27,13 +27,15 @@ public class CustomerDatabaseApp {
     private Sales mySales;
     private ManageCustomer mc;
     private ManageSales ms;
-    private JsonWriter jsonWriter;
+    private JsonWriter jsonWriterCD;
+    private JsonWriter jsonWriterSales;
     private JsonCustomerDatabaseReader jsonCustomerDatabaseReader;
     private JsonSalesReader jsonSalesReader;
 
     //EFFECTS: run the CustomerDatabase App
     public CustomerDatabaseApp()throws FileNotFoundException {
-        jsonWriter = new JsonWriter(JSON_STORE_CD);
+        jsonWriterCD = new JsonWriter(JSON_STORE_CD);
+        jsonWriterSales = new JsonWriter(JSON_STORE_S);
         jsonCustomerDatabaseReader = new JsonCustomerDatabaseReader(JSON_STORE_CD);
         jsonSalesReader = new JsonSalesReader(JSON_STORE_S);
         runCustomerDatabase();
@@ -77,9 +79,9 @@ public class CustomerDatabaseApp {
     //EFFECTS: process user command
     public void processCommandMain(String command) {
         if (command.equals("c")) {
-            mc.runManageCustomer(jsonWriter, jsonCustomerDatabaseReader);
+            mc.runManageCustomer(jsonWriterCD, jsonWriterSales, jsonCustomerDatabaseReader);
         } else if (command.equals("s")) {
-            ms.runManageSales();
+            ms.runManageSales(jsonSalesReader);
         } else {
             System.out.println("Selection not valid!");
         }

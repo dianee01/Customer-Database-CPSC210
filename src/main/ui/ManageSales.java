@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import persistence.JsonSalesReader;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class ManageSales {
 
     //MODIFIES: this
     //EFFECTS: process user input
-    public void runManageSales() {
+    public void runManageSales(JsonSalesReader jsonSalesReader) {
         boolean keepGoing = true;
         String command = null;
 
