@@ -57,7 +57,7 @@ public class Item implements Writable {
         JSONObject json = new JSONObject();
         json.put("itemName", itemName);
         json.put("price", price);
-        json.put("purchaseDate", purchaseDate);
+        json.put("purchaseDate", purchaseDate.toJson());
         return json;
     }
 }
