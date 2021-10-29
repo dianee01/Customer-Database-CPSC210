@@ -46,14 +46,16 @@ public class JsonReader {
 
     //EFFECTS: parses CustomerDatabase from JSON object and returns it
     private CustomerDatabase parseCustomerDatabase(JSONObject jsonObject) {
-        JSONArray customers = jsonObject.getJSONArray("customers");
         CustomerDatabase cd = new CustomerDatabase(new ArrayList<Customer>());
+        JSONArray customers = jsonObject.getJSONArray("customers");
 
         for (Object json : customers) {
             JSONObject nextCustomer = (JSONObject) json;
             String name = nextCustomer.getString("name");
             ArrayList<Item> purchases = addPurchases(nextCustomer);
             Customer c = new Customer(name, purchases);
+            Boolean vip = nextCustomer.getBoolean("vip");
+            c.setVip(vip);
             cd.addCustomer(c);
         }
 
@@ -67,7 +69,7 @@ public class JsonReader {
         ArrayList<Item> purchaseOfCustomer = new ArrayList<>();
         for (Object json : purchases) {
             JSONObject nextPurchase = (JSONObject) json;
-            String name = nextPurchase.getString("name");
+            String name = nextPurchase.getString("itemName");
             double price = nextPurchase.getDouble("price");
             Date d = returnOneDate(nextPurchase);
             Item i = new Item(name, price, d);
@@ -79,7 +81,7 @@ public class JsonReader {
     //MODIFIES: purchaseOfCustomer
     //EFFECTS: parse date of a single purchase and help add the purchase into the purchaseOfCustomer list
     private Date returnOneDate(JSONObject nextPurchase) {
-        JSONObject date = nextPurchase.getJSONObject("date");
+        JSONObject date = nextPurchase.getJSONObject("purchaseDate");
         int year = date.getInt("year");
         boolean update = date.getBoolean("update");
         Date newDate = new Date(year, update);

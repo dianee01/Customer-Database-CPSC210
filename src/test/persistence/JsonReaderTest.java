@@ -53,14 +53,14 @@ public class JsonReaderTest extends JsonTest{
             ArrayList<Item> purchase1 = new ArrayList<>();
             Date d1 = new Date(2020);
             purchase1.add(new Item("Chair",5.0, d1));
-            checkCustomer("Diane", purchase1, false, allCustomers.get(0));
             //customer two
             ArrayList<Item> purchase2 = new ArrayList<>();
             Date d2 = new Date(2021);
             purchase2.add(new Item("Desk",1000.0, d2));
             purchase2.add(new Item("Mirror",2000.0, d2));
+            //check for all customers
+            checkCustomer("Diane", purchase1, false, allCustomers.get(0));
             checkCustomer("Eva", purchase2, true, allCustomers.get(1));
-            cd.update(d2);
 
             //regular customers
             List<Customer> regularCustomers = cd.getRegularCustomers();
