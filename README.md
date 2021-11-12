@@ -15,7 +15,7 @@ This project can be used by many stores to track their customers and sales. It c
 
 ## User stories
 
-**Already Developed For Phase 1**
+**Already Developed**
 - As a user, I want to be able to create a new customer and add it to a list of existing customers
 - As a user, I want to be able to see the number of total customers, regular customers, and VIP customers
 - As a user, I want to be able to differentiate between regular and VIP customers
@@ -23,19 +23,17 @@ This project can be used by many stores to track their customers and sales. It c
 - As a user, I want to be able to delete a customer from the VIP customer list and add them into the regular customer list if they purchased less than $1000 dollars within the past calendar year
 - As a user, I want to be able to update my VIP customers list every year or after every newly added customer
 - As a user, I want to be able to sort my VIP customers with decreasing purchasing power/loyalty with the store
-
-**Planned for Phase 2**
-- As a user, I want to be able to save my customer database to file
-- As a user, I want to be able to be able to load my customer database from file
-
-**Planned: class and test cases developed, missing ui**
 - As a user, I want to be able to see the amount of sold items in total
 - As a user, I want to be able to see the amount of sold items per year
 - As a user, I want to be able to see my total sales (in dollars)
 - As a user, I want to be able to see my annual sales (in dollars)
 - As a user, I want to be able to select a customer and add a new item they purchased with associated dollar amount
+- As a user, I want to be able to save my customer database to file
+- As a user, I want to be able to be able to load my customer database from file
+- As a user, I want to have loaded data available when I switch from viewing my customer to viewing sales
+
+**Planned**
 - As a user, I want to be able to delete a returned item from the customer's items and total sales
 - As a user, I want to be able to delete a customer from the list if they returned the only item they bought
-- As a user, I want to have loaded data available when I switch from viewing my customer to viewing sales
 
 
