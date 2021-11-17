@@ -14,8 +14,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class CustomerTool extends Tool {
-    DefaultTableModel tableModel;
-    CustomerDatabase cd;
+    private DefaultTableModel tableModel;
+    private CustomerDatabase cd;
 
     public CustomerTool(CustomerDatabaseGUI editor, JComponent parent,
                         DefaultTableModel tableModel, CustomerDatabase cd) {

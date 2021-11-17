@@ -14,8 +14,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class UpdateTool extends Tool {
-    DefaultTableModel tableModel;
-    CustomerDatabase cd;
+    private DefaultTableModel tableModel;
+    private CustomerDatabase cd;
 
     public UpdateTool(CustomerDatabaseGUI editor, JComponent parent,
                       DefaultTableModel tableModel, CustomerDatabase cd) {
@@ -50,6 +50,10 @@ public class UpdateTool extends Tool {
                                     Double.toString(customers.get(i).purchaseAmount()),
                                     Integer.toString(customers.get(i).purchaseCount())});
                 }
+                JOptionPane.showMessageDialog(null,
+                        "Successfully updated",
+                        "Update",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }

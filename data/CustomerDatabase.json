@@ -1,27 +1,52 @@
 {
-    "vipCustomers": [],
-    "customers": [{
+    "vipCustomers": [{
         "purchases": [{
-            "itemName": "chair",
+            "itemName": "Chair",
             "purchaseDate": {
-                "year": 2021,
+                "year": 2020,
                 "update": false
             },
-            "price": 5
+            "price": 2000
         }],
-        "name": "Diane",
-        "vip": false
+        "name": "Dian",
+        "vip": true
     }],
+    "customers": [
+        {
+            "purchases": [{
+                "itemName": "Chair",
+                "purchaseDate": {
+                    "year": 2020,
+                    "update": false
+                },
+                "price": 2000
+            }],
+            "name": "Dian",
+            "vip": true
+        },
+        {
+            "purchases": [{
+                "itemName": "Desk",
+                "purchaseDate": {
+                    "year": 2019,
+                    "update": false
+                },
+                "price": 1000
+            }],
+            "name": "Eva",
+            "vip": false
+        }
+    ],
     "regularCustomers": [{
         "purchases": [{
-            "itemName": "chair",
+            "itemName": "Desk",
             "purchaseDate": {
-                "year": 2021,
+                "year": 2019,
                 "update": false
             },
-            "price": 5
+            "price": 1000
         }],
-        "name": "Diane",
+        "name": "Eva",
         "vip": false
     }]
 }

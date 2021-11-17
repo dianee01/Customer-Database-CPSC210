@@ -2,6 +2,8 @@ package gui;
 
 import gui.tools.*;
 import model.*;
+import persistence.JsonCustomerDatabaseReader;
+import persistence.JsonWriter;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,10 +19,16 @@ import java.util.List;
 public class CustomerDatabaseGUI extends JFrame {
     private static final int WIDTH = 1000;
     private static final int HEIGHT = 600;
+    public static final String JSON_STORE_CD = "./data/CustomerDatabase.json";
+
     private CustomerDatabase customerDatabase;
+
     DefaultTableModel tableModel;
     JTable table;
     TableRowSorter<DefaultTableModel> sorter;
+
+    private JsonWriter jsonWriterCD;
+    private JsonCustomerDatabaseReader jsonCustomerDatabaseReader;
 
     private List<Tool> tools;
     private Tool activeTool;
@@ -44,6 +52,8 @@ public class CustomerDatabaseGUI extends JFrame {
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
         sorter = new TableRowSorter<DefaultTableModel>(tableModel);
+        jsonWriterCD = new JsonWriter(JSON_STORE_CD);
+        jsonCustomerDatabaseReader = new JsonCustomerDatabaseReader(JSON_STORE_CD);
     }
 
     //MODIFIES: this
@@ -74,10 +84,12 @@ public class CustomerDatabaseGUI extends JFrame {
         UpdateTool updateTool = new UpdateTool(this, toolArea, tableModel, customerDatabase);
         tools.add(updateTool);
 
-        LoadTool loadTool = new LoadTool(this, toolArea);
+        LoadTool loadTool = new LoadTool(this, toolArea, jsonCustomerDatabaseReader,
+                tableModel, customerDatabase);
         tools.add(loadTool);
 
-        SaveTool saveTool = new SaveTool(this, toolArea);
+        SaveTool saveTool = new SaveTool(this, toolArea, jsonWriterCD,
+                tableModel, customerDatabase);
         tools.add(saveTool);
 
         setActiveTool(customerTool);
