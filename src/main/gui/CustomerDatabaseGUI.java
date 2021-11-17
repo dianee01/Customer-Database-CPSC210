@@ -31,7 +31,6 @@ public class CustomerDatabaseGUI extends JFrame {
 
     public CustomerDatabaseGUI() {
         super("Customer Database");
-        customerDatabase = new CustomerDatabase(new ArrayList<Customer>());
         initializeFields();
         initializeGraphics();
     }
@@ -39,6 +38,7 @@ public class CustomerDatabaseGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS:  sets activeTool to null, and instantiates tools with ArrayList
     private void initializeFields() {
+        customerDatabase = new CustomerDatabase(new ArrayList<Customer>());
         activeTool = null;
         tools = new ArrayList<Tool>();
         tableModel = new DefaultTableModel();
@@ -68,10 +68,10 @@ public class CustomerDatabaseGUI extends JFrame {
         toolArea.setSize(new Dimension(0, 0));
         add(toolArea, BorderLayout.EAST);
 
-        CustomerTool customerTool = new CustomerTool(this, toolArea, tableModel);
+        CustomerTool customerTool = new CustomerTool(this, toolArea, tableModel, customerDatabase);
         tools.add(customerTool);
 
-        UpdateTool updateTool = new UpdateTool(this, toolArea);
+        UpdateTool updateTool = new UpdateTool(this, toolArea, tableModel, customerDatabase);
         tools.add(updateTool);
 
         LoadTool loadTool = new LoadTool(this, toolArea);

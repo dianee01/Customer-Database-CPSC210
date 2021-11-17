@@ -2,6 +2,7 @@ package gui.tools;
 
 import gui.CustomerDatabaseGUI;
 import model.Customer;
+import model.CustomerDatabase;
 import model.Date;
 import model.Item;
 
@@ -14,10 +15,13 @@ import java.util.ArrayList;
 
 public class CustomerTool extends Tool {
     DefaultTableModel tableModel;
+    CustomerDatabase cd;
 
-    public CustomerTool(CustomerDatabaseGUI editor, JComponent parent, DefaultTableModel tableModel) {
+    public CustomerTool(CustomerDatabaseGUI editor, JComponent parent,
+                        DefaultTableModel tableModel, CustomerDatabase cd) {
         super(editor, parent);
         this.tableModel = tableModel;
+        this.cd = cd;
     }
 
     //MODIFIES: this
@@ -51,12 +55,13 @@ public class CustomerTool extends Tool {
                     purchases.add(purchase);
                 }
                 Customer newCustomer = new Customer(name, purchases);
-                addRow(newCustomer);
+                addRowAndCustomer(newCustomer);
             }
         });
     }
 
-    public void addRow(Customer newCustomer) {
+    public void addRowAndCustomer(Customer newCustomer) {
+        cd.addCustomer(newCustomer);
         tableModel.insertRow(0,
                 new Object[] {newCustomer.getName(), Boolean.toString(newCustomer.isVip()),
                         Double.toString(newCustomer.purchaseAmount()), Integer.toString(newCustomer.purchaseCount())});

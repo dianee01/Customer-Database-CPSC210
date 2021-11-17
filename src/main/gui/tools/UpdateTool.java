@@ -1,17 +1,27 @@
 package gui.tools;
 
 import gui.CustomerDatabaseGUI;
+import model.Customer;
+import model.CustomerDatabase;
+import model.Date;
+import model.Item;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class UpdateTool extends Tool {
+    DefaultTableModel tableModel;
+    CustomerDatabase cd;
 
-    public UpdateTool(CustomerDatabaseGUI editor, JComponent parent) {
+    public UpdateTool(CustomerDatabaseGUI editor, JComponent parent,
+                      DefaultTableModel tableModel, CustomerDatabase cd) {
         super(editor, parent);
-
+        this.tableModel = tableModel;
+        this.cd = cd;
     }
 
     //MODIFIES: this
@@ -25,6 +35,22 @@ public class UpdateTool extends Tool {
 
     @Override
     public void buttonClicked(JComponent parent) {
-
+        button.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String updateDate = JOptionPane.showInputDialog(parent,
+                        "What is the current year?", null);
+                cd.update(new Date(Integer.parseInt(updateDate)));
+                tableModel.setRowCount(0);
+                ArrayList<Customer> customers = cd.getCustomers();
+                for (int i = 0; i < cd.totalCustomerSize(); i++) {
+                    tableModel.insertRow(0,
+                            new Object[] {customers.get(i).getName(),
+                                    Boolean.toString(customers.get(i).isVip()),
+                                    Double.toString(customers.get(i).purchaseAmount()),
+                                    Integer.toString(customers.get(i).purchaseCount())});
+                }
+            }
+        });
     }
 }
