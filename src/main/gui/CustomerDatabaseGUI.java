@@ -5,7 +5,11 @@ import model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +20,7 @@ public class CustomerDatabaseGUI extends JFrame {
     private CustomerDatabase customerDatabase;
     DefaultTableModel tableModel;
     JTable table;
+    TableRowSorter<DefaultTableModel> sorter;
 
     private List<Tool> tools;
     private Tool activeTool;
@@ -38,6 +43,7 @@ public class CustomerDatabaseGUI extends JFrame {
         tools = new ArrayList<Tool>();
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
+        sorter = new TableRowSorter<DefaultTableModel>(tableModel);
     }
 
     //MODIFIES: this
@@ -47,6 +53,7 @@ public class CustomerDatabaseGUI extends JFrame {
         setSize(WIDTH, HEIGHT);
         setLayout(new BorderLayout());
         createTable();
+        createSorter();
         createTools();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -86,6 +93,8 @@ public class CustomerDatabaseGUI extends JFrame {
         activeTool = tool;
     }
 
+    //MODIFIES: this
+    //EFFECTS: helper method that creates a table that displays the multiple Xs
     private void createTable() {
         tableModel.addColumn("Name");
         tableModel.addColumn("VIP Status");
@@ -96,5 +105,26 @@ public class CustomerDatabaseGUI extends JFrame {
 
         scrollPane.setSize(new Dimension(0, 0));
         add(scrollPane);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creates a filter for the multiple Xs; filter according vip and regular customers
+    private void createSorter() {
+        JPanel filterArea = new JPanel(new BorderLayout());
+        add(filterArea, BorderLayout.NORTH);
+        JComboBox<String> comboBox = new JComboBox<>(new String[]{"","false","true"});
+        JButton button = new JButton("filter vip");
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RowFilter<DefaultTableModel, Object> rf  =
+                        RowFilter.regexFilter(comboBox.getSelectedItem().toString(), 1);
+                sorter.setRowFilter(rf);
+            }
+        });
+        filterArea.add(comboBox, BorderLayout.CENTER);
+        filterArea.add(button, BorderLayout.WEST);
+        table.setRowSorter(sorter);
     }
 }
