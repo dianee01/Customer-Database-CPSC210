@@ -23,11 +23,6 @@ public abstract class Tool {
         active = false;
     }
 
-    //getters
-    public boolean isActive() {
-        return active;
-    }
-
     //EFFECTS: sets this Tool's active field to true
     public void activate() {
         active = true;

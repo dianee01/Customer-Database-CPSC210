@@ -23,9 +23,9 @@ public class CustomerDatabaseGUI extends JFrame {
 
     private CustomerDatabase customerDatabase;
 
-    DefaultTableModel tableModel;
-    JTable table;
-    TableRowSorter<DefaultTableModel> sorter;
+    private DefaultTableModel tableModel;
+    private JTable table;
+    private TableRowSorter<DefaultTableModel> sorter;
 
     private JsonWriter jsonWriterCD;
     private JsonCustomerDatabaseReader jsonCustomerDatabaseReader;
@@ -33,12 +33,8 @@ public class CustomerDatabaseGUI extends JFrame {
     private List<Tool> tools;
     private Tool activeTool;
 
-    public static void main(String[] args) {
-        new CustomerDatabaseGUI();
-    }
-
+    //EFFECTS: constructs a customer database gui
     public CustomerDatabaseGUI() {
-        super("Customer Database");
         initializeFields();
         initializeGraphics();
     }
@@ -67,7 +63,7 @@ public class CustomerDatabaseGUI extends JFrame {
         createTools();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setVisible(true);
+        //setVisible(true);
     }
 
     //MODIFIES: this

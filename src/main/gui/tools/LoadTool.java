@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//loads data from file
 public class LoadTool extends Tool {
     private JsonCustomerDatabaseReader jsonCustomerDatabaseReader;
     private CustomerDatabase cd;

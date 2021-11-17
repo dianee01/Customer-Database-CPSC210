@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+//updates customers to the new year
 public class UpdateTool extends Tool {
     private DefaultTableModel tableModel;
     private CustomerDatabase cd;

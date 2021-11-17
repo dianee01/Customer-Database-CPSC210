@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//saves data to file
 public class SaveTool extends Tool {
     private JsonWriter jsonWriterCD;
     private CustomerDatabase cd;

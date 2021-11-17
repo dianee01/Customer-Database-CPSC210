@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+//adds the customer to JTable and CustomerDatabase
 public class CustomerTool extends Tool {
     private DefaultTableModel tableModel;
     private CustomerDatabase cd;
@@ -60,6 +61,8 @@ public class CustomerTool extends Tool {
         });
     }
 
+    //MODIFIES: this
+    //EFFECTS: helper function that adds the customer into CustomerDatabase and JTable
     public void addRowAndCustomer(Customer newCustomer) {
         cd.addCustomer(newCustomer);
         tableModel.insertRow(0,
