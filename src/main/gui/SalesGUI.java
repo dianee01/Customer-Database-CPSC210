@@ -1,8 +1,9 @@
 package gui;
 
 import gui.tools.*;
-import model.*;
-import persistence.JsonCustomerDatabaseReader;
+import model.Item;
+import model.Sales;
+import persistence.JsonSalesReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
@@ -14,29 +15,25 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-//Customer Database GUI main window frame
-public class CustomerDatabaseGUI extends JFrame {
+//Sales GUI main window frame
+public class SalesGUI extends JFrame {
     private static final int WIDTH = 1000;
     private static final int HEIGHT = 600;
-    public static final String JSON_STORE_CD = "./data/CustomerDatabase.json";
     public static final String JSON_STORE_S = "./data/Sales.json";
 
-    private CustomerDatabase customerDatabase;
     private Sales sales;
 
     private DefaultTableModel tableModel;
     private JTable table;
     private TableRowSorter<DefaultTableModel> sorter;
 
-    private JsonWriter jsonWriterCD;
     private JsonWriter jsonWriterSales;
-    private JsonCustomerDatabaseReader jsonCustomerDatabaseReader;
+    private JsonSalesReader jsonSalesReader;
 
     private List<Tool> tools;
-    private Tool activeTool;
 
     //EFFECTS: constructs a customer database gui
-    public CustomerDatabaseGUI() {
+    public SalesGUI() {
         initializeFields();
         initializeGraphics();
     }
@@ -44,16 +41,13 @@ public class CustomerDatabaseGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS:  sets activeTool to null, and instantiates tools with ArrayList
     private void initializeFields() {
-        customerDatabase = new CustomerDatabase(new ArrayList<Customer>());
         sales = new Sales(new ArrayList<Item>());
-        activeTool = null;
         tools = new ArrayList<Tool>();
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
         sorter = new TableRowSorter<DefaultTableModel>(tableModel);
-        jsonWriterCD = new JsonWriter(JSON_STORE_CD);
         jsonWriterSales = new JsonWriter(JSON_STORE_S);
-        jsonCustomerDatabaseReader = new JsonCustomerDatabaseReader(JSON_STORE_CD);
+        jsonSalesReader = new JsonSalesReader(JSON_STORE_S);
     }
 
     //MODIFIES: this
@@ -76,59 +70,30 @@ public class CustomerDatabaseGUI extends JFrame {
         JPanel toolArea = new JPanel();
         toolArea.setLayout(new GridLayout(0,1));
         toolArea.setSize(new Dimension(0, 0));
-        add(toolArea, BorderLayout.EAST);
+        add(toolArea, BorderLayout.SOUTH);
 
-        CustomerTool customerTool = new CustomerTool(this, toolArea, tableModel, customerDatabase, sales);
-        tools.add(customerTool);
+        LoadToolSales loadTool = new LoadToolSales(this, toolArea, jsonSalesReader,
+                tableModel, sales);
+        tools.add(loadTool);
 
-        UpdateTool updateTool = new UpdateTool(this, toolArea, tableModel, customerDatabase);
-        tools.add(updateTool);
-
-        LoadToolCD loadToolCD = new LoadToolCD(this, toolArea, jsonCustomerDatabaseReader,
-                tableModel, customerDatabase);
-        tools.add(loadToolCD);
-
-        SaveTool saveTool = new SaveTool(this, toolArea, jsonWriterCD, jsonWriterSales,
-                tableModel, customerDatabase, sales);
-        tools.add(saveTool);
-
-        manageSales(toolArea);
-
-        setActiveTool(customerTool);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: helper function to createTools that switch to sales panel
-    public void manageSales(JPanel toolArea) {
-        JButton salesButton = new JButton("Manage Sales");
-        toolArea.add(salesButton);
-        salesButton.addActionListener(new java.awt.event.ActionListener() {
+        JButton cdButton = new JButton("Manage Customers");
+        toolArea.add(cdButton);
+        cdButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SalesGUI salesGUI = new SalesGUI();
+                CustomerDatabaseGUI customerDatabaseGUI = new CustomerDatabaseGUI();
                 setVisible(false);
-                salesGUI.setVisible(true);
+                customerDatabaseGUI.setVisible(true);
             }
         });
     }
 
     //MODIFIES: this
-    //EFFECTS: sets the given tool as the activeTool
-    public void setActiveTool(Tool tool) {
-        if (activeTool != null) {
-            activeTool.deactivate();
-        }
-        tool.activate();
-        activeTool = tool;
-    }
-
-    //MODIFIES: this
     //EFFECTS: helper method that creates a table that displays the multiple Xs
     private void createTable() {
-        tableModel.addColumn("Name");
-        tableModel.addColumn("VIP Status");
-        tableModel.addColumn("Total purchases");
-        tableModel.addColumn("Number of items purchased");
+        tableModel.addColumn("Item Name");
+        tableModel.addColumn("Price");
+        tableModel.addColumn("Sold Year");
         JScrollPane scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
 
@@ -141,8 +106,12 @@ public class CustomerDatabaseGUI extends JFrame {
     private void createSorter() {
         JPanel filterArea = new JPanel(new BorderLayout());
         add(filterArea, BorderLayout.NORTH);
-        JComboBox<String> comboBox = new JComboBox<>(new String[]{"","false","true"});
-        JButton button = new JButton("filter vip");
+        String[] listOfItems = new String[]{};
+        for (int i = 0; i < sales.itemCount(); i++) {
+            listOfItems[i] = String.valueOf(sales.getSoldItems().get(i).getPurchaseDate().getYear());
+        }
+        JComboBox<String> comboBox = new JComboBox<>(listOfItems);
+        JButton button = new JButton("filter year");
         button.addActionListener(new ActionListener() {
 
             @Override

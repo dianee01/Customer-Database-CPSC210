@@ -49,14 +49,27 @@ public class LoginPageGUI extends JFrame {
     //MODIFIES: this
     //EFFECTS: helper function that adds the button that switches to the other frame (CustomerDatabaseGUI)
     public void switchToOther(JPanel mainArea) {
-        JButton button = new JButton("Manage Customers");
-        mainArea.add(button, BorderLayout.SOUTH);
-        button.addActionListener(new java.awt.event.ActionListener() {
+        JPanel switchToOther = new JPanel();
+        add(switchToOther, BorderLayout.SOUTH);
+
+        JButton cdButton = new JButton("Manage Customers");
+        switchToOther.add(cdButton);
+        cdButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CustomerDatabaseGUI customerDatabaseGUI = new CustomerDatabaseGUI();
                 setVisible(false);
                 customerDatabaseGUI.setVisible(true);
+            }
+        });
+        JButton salesButton = new JButton("Manage Sales");
+        switchToOther.add(salesButton);
+        salesButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalesGUI salesGUI = new SalesGUI();
+                setVisible(false);
+                salesGUI.setVisible(true);
             }
         });
     }

@@ -1,6 +1,7 @@
 package gui.tools;
 
 import gui.CustomerDatabaseGUI;
+import gui.SalesGUI;
 import model.Customer;
 import model.CustomerDatabase;
 import model.Date;
@@ -15,15 +16,15 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//loads data from file
-public class LoadTool extends Tool {
+//loads customer database data from file
+public class LoadToolCD extends Tool {
     private JsonCustomerDatabaseReader jsonCustomerDatabaseReader;
     private CustomerDatabase cd;
     private DefaultTableModel tableModel;
 
-    public LoadTool(CustomerDatabaseGUI editor, JComponent parent,
-                    JsonCustomerDatabaseReader jsonCustomerDatabaseReader,
-                    DefaultTableModel tableModel, CustomerDatabase cd) {
+    public LoadToolCD(CustomerDatabaseGUI editor, JComponent parent,
+                      JsonCustomerDatabaseReader jsonCustomerDatabaseReader,
+                      DefaultTableModel tableModel, CustomerDatabase cd) {
         super(editor, parent);
         this.jsonCustomerDatabaseReader = jsonCustomerDatabaseReader;
         this.cd = cd;

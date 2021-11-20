@@ -1,10 +1,7 @@
 package gui.tools;
 
 import gui.CustomerDatabaseGUI;
-import model.Customer;
-import model.CustomerDatabase;
-import model.Date;
-import model.Item;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,12 +14,14 @@ import java.util.ArrayList;
 public class CustomerTool extends Tool {
     private DefaultTableModel tableModel;
     private CustomerDatabase cd;
+    private Sales sales;
 
     public CustomerTool(CustomerDatabaseGUI editor, JComponent parent,
-                        DefaultTableModel tableModel, CustomerDatabase cd) {
+                        DefaultTableModel tableModel, CustomerDatabase cd, Sales sales) {
         super(editor, parent);
         this.tableModel = tableModel;
         this.cd = cd;
+        this.sales = sales;
     }
 
     //MODIFIES: this
@@ -53,7 +52,7 @@ public class CustomerTool extends Tool {
                             "What year is this item purchased?", null);
                     Item purchase = new Item(purchaseName, Double.parseDouble(purchasePrice),
                             new Date(Integer.parseInt(purchaseDate)));
-                    purchases.add(purchase);
+                    addPurchase(purchases, purchase);
                 }
                 Customer newCustomer = new Customer(name, purchases);
                 addRowAndCustomer(newCustomer);
@@ -68,5 +67,12 @@ public class CustomerTool extends Tool {
         tableModel.insertRow(0,
                 new Object[] {newCustomer.getName(), Boolean.toString(newCustomer.isVip()),
                         Double.toString(newCustomer.purchaseAmount()), Integer.toString(newCustomer.purchaseCount())});
+    }
+
+    //MODIFIES: this
+    //EFFECTS: helper function that adds the purchase into a list of purchases and into sales
+    public void addPurchase(ArrayList<Item> purchases, Item purchase) {
+        purchases.add(purchase);
+        sales.addItemSold(purchase);
     }
 }

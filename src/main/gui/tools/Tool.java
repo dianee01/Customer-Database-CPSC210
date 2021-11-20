@@ -1,6 +1,7 @@
 package gui.tools;
 
 import gui.CustomerDatabaseGUI;
+import gui.SalesGUI;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -16,6 +17,14 @@ public abstract class Tool {
 
 
     public Tool(CustomerDatabaseGUI customerDatabaseGUI, JComponent parent) {
+        this.editor = editor;
+        createButton(parent);
+        buttonClicked(parent);
+        addToParent(parent);
+        active = false;
+    }
+
+    public Tool(SalesGUI salesGUI, JComponent parent) {
         this.editor = editor;
         createButton(parent);
         buttonClicked(parent);
