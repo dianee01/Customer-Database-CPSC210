@@ -2,6 +2,7 @@ package gui;
 
 import gui.tools.*;
 import model.*;
+import model.Event;
 import persistence.JsonCustomerDatabaseReader;
 import persistence.JsonWriter;
 
@@ -39,6 +40,7 @@ public class CustomerDatabaseGUI extends JFrame {
     public CustomerDatabaseGUI() {
         initializeFields();
         initializeGraphics();
+        printLog();
     }
 
     // MODIFIES: this
@@ -65,9 +67,14 @@ public class CustomerDatabaseGUI extends JFrame {
         createTable();
         createSorter();
         createTools();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        //setVisible(true);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                printLog();
+                System.exit(0);
+            }
+        });
     }
 
     //MODIFIES: this
@@ -155,5 +162,12 @@ public class CustomerDatabaseGUI extends JFrame {
         filterArea.add(comboBox, BorderLayout.CENTER);
         filterArea.add(button, BorderLayout.WEST);
         table.setRowSorter(sorter);
+    }
+
+    //EFFECTS: prints Event long when quit
+    private void printLog() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e.toString());
+        }
     }
 }

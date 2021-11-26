@@ -32,6 +32,16 @@ This project can be used by many stores to track their customers and sales. It c
 - As a user, I want to be able to be able to load my customer database from file
 - As a user, I want to have loaded data available when I switch from viewing my customer to viewing sales
 
+**Phase 4: Task 2**
+Thu Nov 25 20:11:08 PST 2021
+Added Chair
+Thu Nov 25 20:11:08 PST 2021
+Added Diane
+Thu Nov 25 20:11:10 PST 2021
+Updated Customer Database to 2021
+Thu Nov 25 20:11:10 PST 2021
+Set Diane vip status true
+
 **Planned**
 - As a user, I want to be able to delete a returned item from the customer's items and total sales
 - As a user, I want to be able to delete a customer from the list if they returned the only item they bought

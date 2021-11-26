@@ -39,12 +39,15 @@ public class Customer implements Writable {
     //MODIFIES: this
     //EFFECTS: set this.name to name
     public void setName(String name) {
+        EventLog.getInstance().logEvent(new Event("Set " + this.name +  "name to: " + name));
         this.name = name;
     }
 
     //MODIFIES: this
     //EFFECTS: set this.vip to vip
     public void setVip(boolean vip) {
+        EventLog.getInstance().logEvent(new Event("Set " + this.name
+                + " vip status " + Boolean.toString(vip)));
         this.vip = vip;
     }
 
@@ -68,6 +71,7 @@ public class Customer implements Writable {
     //MODIFIES: this, add another item to total sales
     //EFFECTS: add a purchased item to the specific customer's purchase history, and add it to total sales
     public void addPurchase(Item i, Sales s) {
+        EventLog.getInstance().logEvent(new Event("Added " + i.getItemName()));
         purchases.add(i);
         s.addItemSold(i);
     }
@@ -76,6 +80,7 @@ public class Customer implements Writable {
     //MODIFIES: this, add another item to total sales
     //EFFECTS: remove a purchased item to the specific customer's purchase history, and remove it from total sales
     public void deletePurchase(Item i, Sales s) {
+        EventLog.getInstance().logEvent(new Event("Deleted " + i.getItemName()));
         if (s.itemCount() > 0) {
             s.deleteItemFromSold(i);
             purchases.remove(i);

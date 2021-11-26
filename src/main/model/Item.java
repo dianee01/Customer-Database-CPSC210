@@ -37,18 +37,22 @@ public class Item implements Writable {
     //MODIFIES: this
     //EFFECTS: set itemName to i
     public void setItemName(String i) {
+        EventLog.getInstance().logEvent(new Event("Set " + this.itemName +  "name to: " + i));
         this.itemName = i;
     }
 
     //MODIFIES: this
     //EFFECTS: set price to p
     public void setPrice(double p) {
+        EventLog.getInstance().logEvent(new Event("Set" + this.itemName + "item price to: " + p));
         this.price = p;
     }
 
     //MODIFIES: this
     //EFFECTS: set purchaseDate to d
     public void setPurchaseDate(Date d) {
+        EventLog.getInstance().logEvent(new Event("Set" + this.itemName
+                + "item purchase year to: " + d.getYear()));
         this.purchaseDate = d;
     }
 

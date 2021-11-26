@@ -65,6 +65,7 @@ public class CustomerDatabase implements Writable {
 
     //EFFECTS: add a new customer
     public void addCustomer(Customer c) {
+        EventLog.getInstance().logEvent(new Event("Added " + c.getName()));
         customers.add(c);
         if (c.isVip()) {
             vipCustomers.add(c);
@@ -78,6 +79,7 @@ public class CustomerDatabase implements Writable {
     //EFFECTS: if customer is a regular customer and no longer purchased anything from the store
     //         then delete them from the customer tracker
     public void removeRegularCustomer(Customer c) {
+        EventLog.getInstance().logEvent(new Event("Removed " + c.getName()));
         if (c.purchaseCount() == 0) {
             regularCustomers.remove(c);
             customers.remove(c);
@@ -88,6 +90,7 @@ public class CustomerDatabase implements Writable {
     //MODIFIES: this
     //EFFECTS: check for vip and regular customers' purchased amount in the last year, update accordingly
     public void update(Date d) {
+        EventLog.getInstance().logEvent(new Event("Updated Customer Database to " + d.getYear()));
         for (Customer c : customers) {
             double totalPurchasesLastYear = 0;
             for (Item i : c.getPurchases()) {

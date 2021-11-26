@@ -1,6 +1,8 @@
 package gui;
 
 import gui.tools.*;
+import model.Event;
+import model.EventLog;
 import model.Item;
 import model.Sales;
 import persistence.JsonSalesReader;
@@ -59,9 +61,14 @@ public class SalesGUI extends JFrame {
         createTable();
         createSorter();
         createTools();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        //setVisible(true);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                printLog();
+                System.exit(0);
+            }
+        });
     }
 
     //MODIFIES: this
@@ -124,5 +131,12 @@ public class SalesGUI extends JFrame {
         filterArea.add(comboBox, BorderLayout.CENTER);
         filterArea.add(button, BorderLayout.WEST);
         table.setRowSorter(sorter);
+    }
+
+    //EFFECTS: prints Event long when quit
+    private void printLog() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e.toString());
+        }
     }
 }

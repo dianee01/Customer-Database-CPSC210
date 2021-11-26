@@ -1,8 +1,7 @@
 package gui;
 
-import model.Customer;
-import model.Date;
-import model.Item;
+import model.*;
+import model.Event;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -41,9 +40,8 @@ public class LoginPageGUI extends JFrame {
 
         switchToOther(mainArea);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setVisible(true);
+        windowClose();
     }
 
     //MODIFIES: this
@@ -72,5 +70,24 @@ public class LoginPageGUI extends JFrame {
                 salesGUI.setVisible(true);
             }
         });
+    }
+
+    //MODIFIES: this
+    private void windowClose() {
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                printLog();
+                System.exit(0);
+            }
+        });
+    }
+
+    //EFFECTS: prints Event long when quit
+    private void printLog() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e.toString());
+        }
     }
 }

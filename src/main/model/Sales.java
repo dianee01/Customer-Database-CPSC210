@@ -63,6 +63,7 @@ public class Sales implements Writable {
     //MODIFIES: this
     //EFFECTS: add a new item i to soldItems
     public void addItemSold(Item i) {
+        EventLog.getInstance().logEvent(new Event("Added " + i.getItemName()));
         soldItems.add(i);
         totalSales += i.getPrice();
     }
@@ -71,6 +72,7 @@ public class Sales implements Writable {
     //MODIFIES: this
     //EFFECTS: delete a returned item
     public void deleteItemFromSold(Item i) {
+        EventLog.getInstance().logEvent(new Event("Deleted " + i.getItemName()));
         if (soldItems.size() > 0) {
             soldItems.remove(i);
             totalSales -= i.getPrice();
@@ -81,6 +83,7 @@ public class Sales implements Writable {
     //MODIFIES: Customer c's purchases, and customer database if that is the only item the regular customer purchased
     //EFFECTS: entirely return an item
     public void returnItem(CustomerDatabase cd, Customer c, Item i, Sales s) {
+        EventLog.getInstance().logEvent(new Event("Customer" + c.getName() + "Returned " + i.getItemName()));
         c.deletePurchase(i, s);
         cd.removeRegularCustomer(c);
     }

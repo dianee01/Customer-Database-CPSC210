@@ -1,11 +1,11 @@
 {
-    "totalSales": 1000,
+    "totalSales": 1000.5,
     "soldItems": [{
         "itemName": "Chair",
         "purchaseDate": {
-            "year": 2021,
+            "year": 2020,
             "update": false
         },
-        "price": 1000
+        "price": 1000.5
     }]
 }
