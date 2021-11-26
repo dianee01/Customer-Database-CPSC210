@@ -29,7 +29,6 @@ public class SalesGUI extends JFrame {
     private JTable table;
     private TableRowSorter<DefaultTableModel> sorter;
 
-    private JsonWriter jsonWriterSales;
     private JsonSalesReader jsonSalesReader;
 
     private List<Tool> tools;
@@ -48,7 +47,6 @@ public class SalesGUI extends JFrame {
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
         sorter = new TableRowSorter<DefaultTableModel>(tableModel);
-        jsonWriterSales = new JsonWriter(JSON_STORE_S);
         jsonSalesReader = new JsonSalesReader(JSON_STORE_S);
     }
 

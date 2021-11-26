@@ -42,6 +42,9 @@ Updated Customer Database to 2021
 Thu Nov 25 20:11:10 PST 2021
 Set Diane vip status true
 
+**Phase 4: Task 3**
+- I would definitely refactor and delete the Date class. Originally I was thinking of having update customers using a method within date and a boolean named update. However, when I was building the rest of my project, I found that not only does update not require to be done through calling Date methods, it was also very hard to implement having to create a new Date object each time when there is a purchased item. This refactoring would significantly make my Customer and CustomerDatabase and basically all other classes to be more efficient.
+
 **Planned**
 - As a user, I want to be able to delete a returned item from the customer's items and total sales
 - As a user, I want to be able to delete a customer from the list if they returned the only item they bought

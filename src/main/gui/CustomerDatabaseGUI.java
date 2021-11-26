@@ -34,7 +34,6 @@ public class CustomerDatabaseGUI extends JFrame {
     private JsonCustomerDatabaseReader jsonCustomerDatabaseReader;
 
     private List<Tool> tools;
-    private Tool activeTool;
 
     //EFFECTS: constructs a customer database gui
     public CustomerDatabaseGUI() {
@@ -48,7 +47,6 @@ public class CustomerDatabaseGUI extends JFrame {
     private void initializeFields() {
         customerDatabase = new CustomerDatabase(new ArrayList<Customer>());
         sales = new Sales(new ArrayList<Item>());
-        activeTool = null;
         tools = new ArrayList<Tool>();
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
@@ -100,8 +98,6 @@ public class CustomerDatabaseGUI extends JFrame {
         tools.add(saveTool);
 
         manageSales(toolArea);
-
-        setActiveTool(customerTool);
     }
 
     //MODIFIES: this
@@ -117,16 +113,6 @@ public class CustomerDatabaseGUI extends JFrame {
                 salesGUI.setVisible(true);
             }
         });
-    }
-
-    //MODIFIES: this
-    //EFFECTS: sets the given tool as the activeTool
-    public void setActiveTool(Tool tool) {
-        if (activeTool != null) {
-            activeTool.deactivate();
-        }
-        tool.activate();
-        activeTool = tool;
     }
 
     //MODIFIES: this
